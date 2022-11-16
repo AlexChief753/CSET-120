@@ -1,0 +1,16 @@
+Contact Page
+About Us Page
+Coupons for account holders
+Deals and Sales
+Rewards System
+Popups
+If signed in auto fill data in payment
+Login/Signup isn't new page (popup)
+Make Reservation
+Animations
+Home Page
+    Links to all other pages
+    Reservation
+
+"Are you a robot?" verification
+    
