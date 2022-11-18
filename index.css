@@ -9,18 +9,42 @@
 {
     display: flex;
     /* border: 5px solid red; */
+    /* justify-content: right; */
 }
-menu{
+.carto{
+    display: flex;
+}
+menu
+{
     width: 80%;
     border: 1px solid black;
 }
+.menu_row
+{
+    display: flex;
+}
+.menu_item
+{
+    width: 20%;
+    border: 10px solid black;
+}
+.menu_item img
+{
+    width: 100%;
+}
+
+
+/* cart */
 cart{
     width: 20%;
     margin-right: 30px;
+    margin-top:12px;
     border: 1px solid black;
     padding: 5px;
     background-color: black;
     color: white;
+    position: fixed;
+    height: 100vh;
 }
 #cart_table tr
 {
@@ -32,16 +56,19 @@ cart{
 {
     
 }
-.money{
+.money
+{
     display: flex;
     flex-direction: column;
     justify-content: right;
 }
-.money div{
+.money div
+{
     display: flex;
     justify-content: right;
     margin-right: 10px;
 }
-.money div p {
+.money div p 
+{
     padding-left: 5px;
 }
