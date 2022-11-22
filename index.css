@@ -2,7 +2,94 @@
 .text-input-block {
     display: block;
 }
+/* CSS File for home page*/
 
+header{
+
+}
+
+#review{
+    background-color: yellow;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    flex-direction: column;
+    display: flex;
+}
+#review h2, h4{
+    text-align: center;
+}
+
+.quote{
+    
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#num1{
+    width: 300px;
+    height: 300px;
+    background-color: #fcfcfc;
+    padding: 20px;
+    font-size: 20px;
+    margin: 20px;
+}
+
+#num2{
+    width: 300px;
+    height: 300px;
+    background-color: #fcfcfc;
+    padding: 20px;
+    font-size: 20px;
+    margin: 20px;
+}
+
+#num3{
+    width: 300px;
+    height: 300px;
+    background-color: #fcfcfc;
+    padding: 20px;
+    font-size: 20px;
+    margin: 20px;
+    
+}
+
+.contact{
+    flex: end;
+    min-height: 150px;
+    color: white;
+    /* padding: 20px; */
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#gmap
+{
+    width: 100%;
+    height: 400px;
+}
+#media{
+    text-align: center;
+}
+
+.socials{
+    margin: auto 0;
+    min-height: 100%;
+    width: 200px;
+    justify-content: space-evenly;
+    display: inline-flex;
+}
+
+footer{
+    display: flexbox;
+    height: 100%;
+    width: 100%;
+    background-color: #555;
+    padding: 10px;
+
+}
 
 
 
@@ -11,18 +98,62 @@
 {
     display: flex;
     /* border: 5px solid red; */
+    /* justify-content: right; */
+    width: 96%;
 }
-menu{
+.carto{
+    display: flex;
+}
+menu
+{
     width: 80%;
     border: 1px solid black;
 }
+.menu_row
+{
+    display: flex;
+}
+.menu_item
+{
+    width: 20%;
+    border: 5px solid black;
+}
+.menu_item:hover
+{
+    border: 5px solid red;
+}
+.menu_item img
+{
+    width: 100%;
+    height: 200px
+}
+.menu_item button
+{
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+.menu_item button:hover
+{
+    background-color: red;
+}
+.menu_item_fp
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* cart */
 cart{
     width: 20%;
     margin-right: 30px;
+    margin-top:12px;
     border: 1px solid black;
     padding: 5px;
     background-color: black;
     color: white;
+    position: fixed;
+    height: 100vh;
 }
 #cart_table tr
 {
@@ -34,16 +165,79 @@ cart{
 {
     
 }
-.money{
+.money
+{
     display: flex;
     flex-direction: column;
     justify-content: right;
 }
-.money div{
+.money div
+{
     display: flex;
     justify-content: right;
     margin-right: 10px;
 }
-.money div p {
+.money div p 
+{
     padding-left: 5px;
+}
+.cart_buttons
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.cart_buttons button
+{
+    width: 100px;
+    background-color: white;
+}
+.cart_buttons button:hover
+{
+    background-color: red;
+}
+.checkout_btn button
+{
+    width: 100%;
+    background-color: white;
+    height: 30px;
+}
+.checkout_btn button:hover
+{
+    background-color: red;
+}
+
+/* About us Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#about_us
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#about_us img{
+    width: 50%;
+}
+#about_us div{
+    display: flex;
+    width: 75%;
+    justify-content: space-between;
+}
+#about_us div p{
+    border: 1px black solid;
+    padding: 5px;
+    margin: 5px;
+    width: 25%;
+}
+#about_us div p:hover
+{
+    
+}
+.about_us_imgs
+{
+    display: flex;
+}
+.about_us_imgs img
+{
+    height: 300px;
+    padding: 1px;
 }
