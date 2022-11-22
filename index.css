@@ -4,6 +4,17 @@ header{
 
 }
 
+img{
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+}
+
+deals{
+    height: 300px;
+    width: 100%;
+}
+
 customerreviews{
     display: flex;
 }
