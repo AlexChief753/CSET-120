@@ -31,6 +31,7 @@ function add_cart(a)
         console.log(selector.onchange);
     
         cart.push(a.name);
+        cart_price.push(0);
         new_item_name.innerHTML = a.name;
         new_item_cost.innerHTML = a.value;
     
@@ -52,15 +53,23 @@ function update_quantity(a)
     let item_cost = document.getElementsByClassName('test')[a.location];
     let item_cost2 = item_cost.children[2];
     item_cost2.innerHTML = (a.value * a.price);
-    
+    cart_price[a.location] = ((a.value * a.price));
     let total_cost = document.getElementById("total_cost");
 
-    total_cost.innerHTML = 100000000000000000;
+    let total_price = 0;
+    for(x = 0; x< cart.length; x++)
+    {
+        total_price += cart_price[x];
+    }
+    total_cost.innerHTML = total_price;
 }
 
 
 
 
 // base code
+var cart = [];
+var cart_price = [];
 var total_cost = 0;
 var b = 0;
+var total_price = 0;
