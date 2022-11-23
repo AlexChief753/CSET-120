@@ -36,25 +36,25 @@
                     <img src="https://topsecretrecipes.com/images/product/popeyes-chicken-sandwich-copycat-recipe_1.jpg" alt="">
                     <div class="menu_item_fp">
                         <p>Chicken Sandwich</p>
-                        <p>$6.99</p>
+                        <p>$5.99</p>
                     </div>
-                    <button onclick="" value="c_sand"><b>Add to cart</b></button>
+                    <button onclick="add_cart(this)" name="Chicken Sandwich" value="5.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg" alt="">
                     <div class="menu_item_fp">
                         <p>Burger</p>
-                        <p>$6.99</p>
+                        <p>$5.99</p>
                     </div>
-                    <button><b>Add to cart</b></button>
+                    <button onclick="add_cart(this)" name="Burger" value="5.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://www.allrecipes.com/thmb/7ROD1pvWfK-9EFsIOu2Bcq1ykRo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/4461090-chicken-nuggets-AIs-4x3-1-ec1a3b56d5b34b649cee4e5833be0e73.jpg" alt="">
                     <div class="menu_item_fp">
                         <p>Chicken Nuggets</p>
-                        <p>$6.99</p>
+                        <p>$4.99</p>
                     </div>
-                    <button><b>Add to cart</b></button>
+                    <button onclick="add_cart(this)" name="Chicken Nuggets" value="4.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://homemadehooplah.com/wp-content/uploads/2019/01/buffalo-chicken-wings-1200-500x500.jpg" alt="">
@@ -229,17 +229,13 @@
                         <th>#</th>
                         <th>Price</th>
                     </tr>
-                    <tr>
-                        <td> Pizza</th>
-                        <td>100</th>
-                        <td>$1</th>
-                    </tr>
+                    
                 </table>
             </div>
             <div class="money">
                 <div>
                     <p>Subtotal:</p>
-                    <p>$12</p>
+                    <p id="total_cost"></p>
                 </div>
                 <div>
                     <p>Sales Tax:</p>
@@ -270,5 +266,6 @@
             <a href=""></a>
         </div>
     </footer>
+    <script src="menu_page.js"></script>
 </body>
 </html>
