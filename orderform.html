@@ -5,13 +5,73 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Los Pollos Hermanos</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
+
+    <header>
+          <img 
+          src="" 
+          class=""
+          alt="header_logo"
+          >
+          <h1>Los Pollos Hermanos</h1>
+          <div>
+              <ul>
+                  <li>
+                      <button a href="#" >Home</button>
+                  </li>
+                  <li>
+                      <button a href="#" >Menu</button>
+                  </li>
+                  <li>
+                      <button a href="#">About Us</button>
+                  </li>
+                  <li>
+                      <button a href="#">Order Now</button>
+                  </li>
+              </ul>
+          </div>
+    </header>
+
+      <button type="button" class="btn" onclick="">Log in</button>
+
+      <button type="button" class="btn" onclick="">Sign Up</button>
+
+      <br>
+      <br>
+      <br>
+
 
     <div>
         <h2>Payment Page</h2>
         <div class="card-details">
+
+          <div class="nameholder-info">
+            <label> Card Holder Name </label>
+            <input
+              type="text"
+              class="card-name-field"
+              placeholder="Enter your Name"/>
+          </div>
+
+          <div class="nameholder-info">
+            <label> Card Holder Address </label>
+            <input
+              type="text"
+              class="card-name-field"
+              placeholder="Enter your Address"/>
+          </div>
+
+          <div class="nameholder-info">
+            <label> Card Holder Phone Number </label>
+            <input
+              type="text"
+              class="card-name-field"
+              placeholder="Enter your phone number"/>
+          </div>
+
             <p>Pay using Credit or Debit card</p>
       
             <div class="card-number">
@@ -19,13 +79,13 @@
               <input
                 type="text"
                 class="card-number-field"
-                placeholder="###-###-###"/>
+                placeholder="####-####-####"/>
             </div>
             <br />
             <div class="date-number">
               <label> Expiry Date </label>
               <input type="text" class="date-number-field" 
-                     placeholder="DD-MM-YY" />
+                     placeholder="MM-YY" />
             </div>
       
             <div class="cvv-number">
@@ -33,13 +93,7 @@
               <input type="text" class="cvv-number-field" 
                      placeholder="xxx" />
             </div>
-            <div class="nameholder-number">
-              <label> Card Holder name </label>
-              <input
-                type="text"
-                class="card-name-field"
-                placeholder="Enter your Name"/>
-            </div>
+            
             <button type="submit" 
                     class="submit-now-btn">
               submit
@@ -47,6 +101,38 @@
           </div>
 
     </div>
+
+    <br>
+    <br>
+    <br>
+
+
+
+    <footer>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14582975.839701343!2d-97.05820559425042!3d42.46431377175252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1666102760775!5m2!1sen!2sus" id="gmap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="contact">
+          <h3>Contact Information</h3>
+          <p>Address:</p>
+          <p>4257 Isleta Blvd SW.</p>
+          <p>Albuquerque, New Mexico</p>
+          <p>Phone Number:</p>
+          <p>55-5567-1234</p>
+      </div>
+      
+      <div id="media">
+      
+      <div>
+          <h4>Follow Us!</h4>
+              <div class="socials">
+                  <div> <ion-icon name="logo-facebook"></ion-icon> </div>
+                  <div> <ion-icon name="logo-twitter"></ion-icon> </div>
+                  <div> <ion-icon name="logo-youtube"></ion-icon> </div>
+                  <div> <ion-icon name="logo-instagram"></ion-icon> </div>
+              </div>
+      </div>
+  </footer>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     
 </body>
 </html>
