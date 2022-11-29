@@ -20,3 +20,5 @@ Header with nav bar
 
 Total of all money made (lifetime)
 Home Page knows if you're signed in and displays your name? Sign in page replaced with "My account"
+
+Cash option for payment page
