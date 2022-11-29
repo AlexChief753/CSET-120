@@ -12,8 +12,13 @@ header{
 
 .logo_name{
     height: 30px;
-    width: 400px;
-   margin: auto;
+    width: 600px;
+    margin: auto;
+    text-shadow: 1px 0 #999999, 0 2px 0 #888888,
+                0 3px 0 #777777, 0 4px 0 #666666,
+                0 5px 0 #555555, 0 6px 0 #444444,
+                0 7px 0 #333333, 0 8px 7px rgba(0, 0, 0, 0.4),
+                0 9px 10px rgba(0, 0, 0, 0.2);
 }
 
 #logo_header{
@@ -25,10 +30,8 @@ header{
 header, ul{
     list-style: none;
     font-family: "Comic Sans MS", cursive, sans-serif;
-    font-size: 20px;
-    color: black;
-    
-    
+    font-size: 30px;
+    color: black; 
 }
 
 
@@ -42,13 +45,32 @@ header, ul{
     padding: 10px;
     margin: 10px;
     transform: skewX(-30deg);
-    box-shadow: 1px 1px 1px 1px yellow;
+    box-shadow: 2px 2px 2px yellow;
     font-weight: bolder;
+}
+
+.menu_buttons li:hover{
+    border-radius: 50%;
+    transition: 1s ease-in-out;
 }
 
 .logo{
     height: 200px;
     width: 200px;
+}
+
+.btn{
+    width: 200px;
+    padding: 10px;
+    background-color: rgb(235, 235, 34);
+    transform: skewX(-30deg);
+    font-weight: bolder;
+}
+
+.login_buttons{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 img{
