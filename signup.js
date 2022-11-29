@@ -33,6 +33,7 @@ function signUp() {
     }
 }
 
+
 // function logIn(){
 //     if(.children[1].value === "gustavo" && form.children[3].value === "venganza"){
 //         console.log("Manager Login Successful.")
