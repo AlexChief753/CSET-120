@@ -34,17 +34,19 @@ function signUp() {
     }
 }
 
-let managerStatus = false;
 function logIn(){
     if(logInDiv.children[1].value === "gustavo" && logInDiv.children[3].value === "fring"){
+        sessionStorage.setItem("manager", "true");
+        console.log(sessionStorage.getItem("manager"));
         alert("Manager login successful. Entering menu edit mode.");
-        managerStatus = true;
         window.location.href ="MenuPage.html";
     }
     else if (localStorage.getItem(logInDiv.children[1].value) !==null && localStorage.getItem(logInDiv.children[1].value) !== logInDiv.children[3].value){
         alert("Incorrect Password.");
     }
     else if (localStorage.getItem(logInDiv.children[1].value) === logInDiv.children[3].value){
+        sessionStorage.setItem("manager", "false");
+        console.log(sessionStorage.getItem("manager"));
         alert("Successful Login.");
         window.location.href = "MenuPage.html";
     }
@@ -53,6 +55,17 @@ function logIn(){
     }
 }
 
+
+function test(){
+    // let burg = document.getElementById("burger");
+    // burg.remove();
+}
+// contenteditable="true" -> attribute to be changed for prices and names
+// How to edit images? Click deletes image and replaces it with input box to paste link?
+if (sessionStorage.getItem("manager") === "true"){
+    console.log(sessionStorage.getItem("manager"));
+    console.log("manager mode");
+    // F
 
 
 

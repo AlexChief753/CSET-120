@@ -115,6 +115,21 @@ footer{
 
 
 /* Menu Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+manager {
+    box-sizing: border-box;
+    background-color: rgb(186, 186, 186);
+    border: 10px solid black;
+    padding: 0.5%;
+    display: block;
+}
+
+manager h2{}
+
+manager p {}
+
+
 #menu_cart
 {
     display: flex;
