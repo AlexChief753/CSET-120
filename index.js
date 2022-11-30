@@ -1,5 +1,5 @@
-    let form = document.getElementById("form");
-    let logInDiv = document.getElementById("logInDiv");
+let form = document.getElementById("form");
+let logInDiv = document.getElementById("logInDiv");
 
 function signUp() {
     let length = form.childElementCount;
@@ -55,17 +55,62 @@ function logIn(){
     }
 }
 
+// Before the below conditional changes the page, a shallow copy of a menu item must be created
+// This is so that the manager panel can create items
 
-function test(){
-    // let burg = document.getElementById("burger");
-    // burg.remove();
+// This conditional toggles manager edit mode
+if (sessionStorage.getItem("manager") !== "true"){
+    console.log(sessionStorage.getItem("manager"));
+    console.log("Customer mode");
+    document.getElementById("managerDiv").remove();
 }
-// contenteditable="true" -> attribute to be changed for prices and names
-// How to edit images? Click deletes image and replaces it with input box to paste link?
-if (sessionStorage.getItem("manager") === "true"){
+else{
     console.log(sessionStorage.getItem("manager"));
     console.log("manager mode");
-    // F
+    let menuIterative = document.getElementById("menu");
+    for (i=1; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+            let menuItem = menuRow.children[n];
+            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
+            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
+            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
+            let textBox = document.createElement('strong');
+            textBox.innerHTML = "Click image, name, or price to edit";
+            textBox.style.display = "inline";
+            menuItem.insertBefore(textBox, menuItem.children[0]);
+            let linkInput = document.createElement("textarea");
+            linkInput.placeholder = "Paste new image link here";
+            linkInput.style.width = "90%"; linkInput.style.height = "10%";
+            linkInput.style.resize = "none"; linkInput.style.display = "none";
+            menuItem.insertBefore(linkInput, menuItem.children[2]);
+        }
+    }
+}
+
+// This function toggles display of image link input
+function imgReplace(parameter){
+    if(sessionStorage.getItem("manager") === "true"){
+        let parameterIndex = Array.from(parameter.parentElement.children).indexOf(parameter);
+        let textArea = parameter.parentElement.children[Number(parameterIndex) + 1];
+        if (textArea.style.display === "none"){
+            textArea.style.display = "block";
+        }
+        else if (textArea.style.display === "block" && textArea.value === ""){
+            textArea.style.display = "none";
+        }
+    }
+}
+// Image stays until button press. Link input is appended beneath image and disappears on click away
+// Local storage key and array to remember changes from base file 
+// Function that runs on menu load to reflect manager changes.
+// Key for images, for names, and for prices
+// Reassign local storage keys on button press (call a function)
+// Only reassign image if input box has text in it
+
+function testButton(){}
+// Button that saves changes by iterating through, reading values, and updating 
+// innerhtml attribute(s)
 
 
 
