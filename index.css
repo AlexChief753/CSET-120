@@ -1,5 +1,5 @@
 /* CSS File */
-
+/* Home Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 header{
 
 }
@@ -10,10 +10,40 @@ img{
     width: 100%;
 }
 
-deals{
+#deals{
     height: 300px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
 }
+
+.d1
+{
+    border: 2px solid black;
+    font-size: xx-large;
+    background-color: yellow;
+    margin: 5px;
+}
+
+.dealsss
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    animation: deals 1s;
+    animation-iteration-count: infinite;
+    background-color: yellow;
+    border: 10px blue solid;
+}
+
+@keyframes deals
+{
+    0%   {color:blue;}
+    50%   {color:red;}
+    100%   {color:blue;}
+  }
 
 customerreviews{
     display: flex;
@@ -26,7 +56,44 @@ customerreviews{
     justify-content: space-evenly;
     flex-wrap: wrap;
     flex-direction: row;
+    animation: review_background 15s;
+    animation-iteration-count: infinite;
+    border: 10px blue solid;
 }
+
+@keyframes review_background 
+{
+    0%   {background-color:blue;}
+    25%  {background-color:yellow;}
+    50%  {background-color:blue;}
+    75%  {background-color:yellow;}
+    100% {background-color:blue;}
+  }
+  
+
+.meals
+{
+    height: 80vh;
+    animation-name: meals_slideshow;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    display: flex;
+    
+    
+}
+
+@keyframes meals_slideshow
+{
+    0% {background-image: url(https://media.tenor.com/eUGHG9KE7JoAAAAd/fried-chicken-frying.gif);}
+    25% {background-image: url(https://i.pinimg.com/originals/07/be/42/07be42ef7d7b1c6ca05b4eaef2608bd1.gif);}
+    50% {background-image: url(https://cdn.shopify.com/s/files/1/0425/2699/8690/files/French_Fry_Gifs_480x480.gif?v=1653983478);}
+    75% {background-image: url(https://media4.giphy.com/media/2eKjMej0e09EoOPgrl/giphy.gif);}
+    100% {background-image: url(https://media.tenor.com/eUGHG9KE7JoAAAAd/fried-chicken-frying.gif);}
+}
+
 #review h2, h4{
     text-align: center;
     
