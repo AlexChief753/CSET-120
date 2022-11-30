@@ -13,7 +13,7 @@
         <div>
             <ul>
                 <li>
-                    <button></button>
+                    <button onclick="test();">TEST</button>
                 </li>
                 <li>
                     <button></button>
@@ -28,6 +28,15 @@
         </div>
     </header>
 
+<!-- Management Div: to be deleted by javascript upon customer login -->
+    <manager>
+        <h2>Admin Item Manager</h2>
+        <p>Add Item:</p>
+        <input placeholder="Burger" type="text" name="" id="">
+        <input placeholder="$5.99" type="text" name="" id="">
+    </manager>
+<!-- End Management Div -->
+
     <div id="menu_cart">
         <menu>
             <h1>Menu</h1>
@@ -40,7 +49,7 @@
                     </div>
                     <button onclick="add_cart(this)" name="Chicken Sandwich" value="5.99"><b>Add to cart</b></button>
                 </div>
-                <div class="menu_item">
+                <div id="burger" class="menu_item">
                     <img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_21/2870431/190524-classic-american-cheeseburger-ew-207p.jpg" alt="">
                     <div class="menu_item_fp">
                         <p>Burger</p>
@@ -272,7 +281,7 @@
             <a href=""></a>
         </div>
     </footer>
-    <script src="menu_page.js"></script>
+    <script src="index.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </body>
 </html>
