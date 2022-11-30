@@ -50,7 +50,6 @@ function add_cart(a)
     
         location.append(new_item);
         b+=1;
-
     }
     
     let total_price = 0;
