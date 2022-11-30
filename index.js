@@ -66,18 +66,20 @@ if (sessionStorage.getItem("manager") === "true"){
     console.log(sessionStorage.getItem("manager"));
     console.log("manager mode");
     // F
+}
 
 
 
-// CUSTOMER MENU PAGE -----------
+// CUSTOMER MENU PAGE ---------------------------------------------------------------------------------------
 
 
 function add_cart(a)
 {
     let c = true;
-    for(x=0;x<cart.length;x++)
+    let elements = document.getElementsByClassName('cart_item');
+    for(x = 0; x < elements.length; x++)
     {
-        if(a.name == cart[x])
+        if(a.name == elements[x].children[0].innerHTML)
         {
             alert("already in cart");
             c = false;
@@ -86,64 +88,97 @@ function add_cart(a)
     }
     if (c == true)
     {
+        //Creating new item
         let new_item = document.createElement("tr");
-        new_item.classList.add('test');
-
-        let new_item_name = document.createElement("td");
-        let new_item_quantity = document.createElement("td");
-        let new_item_cost = document.createElement("td");
-    
-        let selector = document.createElement("input");
-        selector.type = "number";
-        selector.value = 1;
-        selector.price = a.value;
-        selector.location = b;
-        new_item_quantity.appendChild(selector,0);
-
-        selector.onchange = function() {update_quantity(this)};
-
-        console.log(selector.onchange);
-    
-        cart.push(a.name);
-        cart_price.push(0);
+        new_item.classList.add('cart_item'); // add class name
+        // create tds
+        //name
+        let new_item_name = document.createElement("td"); 
         new_item_name.innerHTML = a.name;
-        new_item_cost.innerHTML = a.value;
-    
+        //input
+        let new_item_quantity = document.createElement("td");
+        let selector = document.createElement("input");
+        selector.type = "number"; selector.value = 1; selector.price = a.value; // setting attribute values
+        selector.onchange = function() {update_quantity(this)};
+        new_item_quantity.appendChild(selector,0);
+        //Price
+        let new_item_cost = document.createElement("td");  new_item_cost.innerHTML = a.value;
+        //Remove item button
+        let trash = document.createElement("td");
+        let trash_button = document.createElement("button");
+        trash_button.innerHTML = "X";
+        trash_button.onclick = function() {remove_item(this)};
+        trash.appendChild(trash_button); 
+        //append children to new_item
         new_item.appendChild(new_item_name);
         new_item.appendChild(new_item_quantity);
         new_item.appendChild(new_item_cost);
-    
+        new_item.appendChild(trash);
+        //append new item to html
         let location = document.getElementById("cart_table");
-    
         location.append(new_item);
-        b+=1;
     }
-   
+    update_cost();
+
 }
 
+function update_cost()
+{
+    let total_price = 0;
+    let elements = document.getElementsByClassName('cart_item');
+    for(x = 0; x < elements.length; x++)
+    {
+        total_price += Number(elements[x].children[2].innerHTML);
+    }
+    total_price = Number(total_price.toFixed(2));
+    let sales_tax_total = Number((total_price * 0.0823).toFixed(2));
+    let final_cost = Number(total_price + sales_tax_total).toFixed(2); 
+    let sub_total_cost = document.getElementById("sub_total_cost");
+    sub_total_cost.innerHTML = total_price;
+    let sales_tax = document.getElementById("sales_tax");
+    sales_tax.innerHTML = sales_tax_total;
+    let total_cost = document.getElementById("total_cost");
+    total_cost.innerHTML = final_cost;
+}
 
 function update_quantity(a)
 {
-    let item_cost = document.getElementsByClassName('test')[a.location];
-    let item_cost2 = item_cost.children[2];
-    item_cost2.innerHTML = (a.value * a.price);
-    cart_price[a.location] = ((a.value * a.price));
-    let total_cost = document.getElementById("total_cost");
-
-    let total_price = 0;
-    for(x = 0; x< cart.length; x++)
+    if(a.value <= 0)
     {
-        total_price += cart_price[x];
+        remove_item(a);
     }
-    total_cost.innerHTML = total_price;
+    else if(a.value > 99)
+    {
+        alert("Max Quantity is 99");
+    }
+    else
+    {
+        let item_cost2 = a.parentNode.parentNode.children[2];
+        console.log(item_cost2);
+        item_cost2.innerHTML = (a.value * a.price).toFixed(2);
+        update_cost();
+    }
+}
+
+function clear_cart()
+{
+    let elements = document.getElementsByClassName('cart_item');
+    while(elements.length > 0)
+    {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+    update_cost();
+}
+
+function remove_item(a)
+{
+    let item = a.parentNode.parentNode;
+    item.remove();
+    update_cost();
 }
 
 
 
 
-// base code
-var cart = [];
-var cart_price = [];
-var total_cost = 0;
-var b = 0;
-var total_price = 0;
+
+// CHECKOUT PAGE ---------------------------------------------------------------------------------------
