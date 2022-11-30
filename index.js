@@ -65,9 +65,7 @@ function test(){
 if (sessionStorage.getItem("manager") === "true"){
     console.log(sessionStorage.getItem("manager"));
     console.log("manager mode");
-    // For loop to iterate through each menu item
-    // Reorganize html page or edit loop to not include rows and titles
-}
+    // F
 
 
 
