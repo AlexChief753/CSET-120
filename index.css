@@ -52,6 +52,7 @@ header, ul{
 .menu_buttons li:hover{
     border-radius: 50%;
     transition: 1s ease-in-out;
+    box-shadow: 2px 2px 2px red;
 }
 
 .logo{
@@ -268,17 +269,16 @@ manager p {}
 
 #menu_cart
 {
-    display: flex;
-    /* border: 5px solid red; */
-    justify-content: space-between;
-    width: 96%;
+    /* display: flex;
+    justify-content: space-between; */
+    width: 100%;
 }
 .carto{
     display: flex;
 }
 menu
 {
-    width: 80%;
+    width: 70%;
     border: 1px solid black;
 }
 .menu_row
@@ -318,13 +318,16 @@ menu
 /* cart */
 cart{
     width: 25%;
-    margin-right: 30px;
     margin-top:12px;
     border: 1px solid black;
     padding: 5px;
     background-color: black;
     color: white;
-    height: 100vh;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 80vh;
+    
 }
 #cart_table tr
 {

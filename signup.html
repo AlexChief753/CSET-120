@@ -9,21 +9,32 @@
 </head>
 <body>
     <header>
-        <h1>Los Pollos Hermanos</h1>
-        <div>
+
+        <div class="logo_name">
+            <h1>Los Pollos Hermanos</h1>
+        </div>
+    
+        <div id="logo_header">
+            <img class="logo" src="https://trello.com/1/cards/6376322a169f7a0aa500a99d/attachments/6376324593878d0164d9da2e/download/Los_Pollos_Hermanos_logo.png" alt="">
+        </div>
+
+        <div class="menu_buttons">
             <ul>
                 <li>
-                    <button></button>
+                    <button onclick="location.href='index.html'"><b>Home</b></button>
                 </li>
                 <li>
-                    <button></button>
+                    <button onclick="location.href='MenuPage.html'"><b>Menu</b></button>
                 </li>
                 <li>
-                    <button></button>
+                    <button onclick="location.href='aboutus.html'"><b>About Us</b></button>
                 </li>
                 <li>
-                    <button></button>
+                    <button onclick="location.href='login.html'"><b>Sign In</b></button>
                 </li>
+                <li>
+                    <button onclick="location.href='MenuPage.html'"><b>Order Now</b></button>
+                </li>             
             </ul>
         </div>
     </header>
@@ -49,14 +60,26 @@
 
 
     <footer>
-        <h3>Contact Information</h3>
-        <p>Address:</p>
-        <p>Phone Number:</p>
-        <h4>Follow Us!</h4>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14582975.839701343!2d-97.05820559425042!3d42.46431377175252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1666102760775!5m2!1sen!2sus" id="gmap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="contact">
+            <h3>Contact Information</h3>
+            <p>Address:</p>
+            <p>4257 Isleta Blvd SW.</p>
+            <p>Albuquerque, New Mexico</p>
+            <p>Phone Number:</p>
+            <p>55-5567-1234</p>
+        </div>
+        
+        <div id="media">
+        
         <div>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
+            <h4>Follow Us!</h4>
+                <div class="socials">
+                    <div> <ion-icon name="logo-facebook"></ion-icon> </div>
+                    <div> <ion-icon name="logo-twitter"></ion-icon> </div>
+                    <div> <ion-icon name="logo-youtube"></ion-icon> </div>
+                    <div> <ion-icon name="logo-instagram"></ion-icon> </div>
+                </div>
         </div>
     </footer>
 
