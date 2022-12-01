@@ -110,7 +110,7 @@ img{
 @keyframes deals
 {
     0%   {color:blue;}
-    50%   {color:red;}
+    50%   {color:black;}
     100%   {color:blue;}
   }
 
