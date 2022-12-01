@@ -39,8 +39,11 @@
         </div>
     </header>
 
-    <div id="form">
-        <label for="email">Email:</label>
+
+    <div class="log-in-outer">
+
+    <div class="form">
+        <label for="email"><b>Email</b>:</label>
         <input required type="text" name="email" id="email" class="text-input-block">
         <label for="password">Password:</label>
         <input required type="text" name="password" id="password" class="text-input-block">
@@ -54,10 +57,11 @@
         <input type="text" name="phoneNumber" id="phoneNumber" class="text-input-block">
         <label for="address">(Optional) Delivery Address:</label>
         <input type="text" name="address" id="address" class="text-input-block">
+        <button onclick="signUp();">Sign Up</button>
     </div>
-    <button onclick="signUp();">Sign Up</button>
+    
 
-
+    </div>
 
     <footer>
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14582975.839701343!2d-97.05820559425042!3d42.46431377175252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1666102760775!5m2!1sen!2sus" id="gmap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

@@ -252,9 +252,72 @@ footer{
 
 }
 
-/* Alex: Sign Up Page */
-.text-input-block {
-    display: block;
+/* Sign up Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.text-input-block 
+{
+    display: flex;
+}
+.form
+{
+    animation-name: sign_up_background;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 60%;
+    margin-top: 3%;
+    padding: 5%;
+    align-items: center;
+}
+.form label{
+    animation-name: form_label;
+    animation-iteration-count: infinite;
+    animation-duration: 15s;
+}
+@keyframes form_label {
+    0%   {color: black;}
+    40%  {color: white;}
+    100% {color: black;}
+}
+
+@keyframes sign_up_background
+{
+    0%   {background-color: yellow;}
+    50%  {background-color: black;}
+    100% {background-color: yellow;}
+}
+
+/* Log in Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+#logInDiv
+{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 30%;
+    margin-top: 5%;
+    padding: 7%;
+    align-items: center;
+    background-color: black;
+    animation-name: login_background;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+}
+@keyframes login_background 
+{
+    0%   {background-color: yellow;}
+  50%  {background-color: black;}
+  100% {background-color: yellow;}
+}
+
+
+#logInDiv input{
+    border-radius: 30px;
+    height: 20px;
+    width: 70%;
+    margin: 5px;
+    text-align: center;
 }
 
 
@@ -268,6 +331,35 @@ footer{
     height: 50vh;
     width: 100%;
     background-color: #f5f5f5;
+}
+
+#logInDiv label
+{
+    color: white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    animation-name: form_label;
+    animation-iteration-count: infinite;
+    animation-duration: 15s;
+}
+#logInDiv button
+{
+    color: black;
+    background-color: white;
+}
+.log-in-outer
+{
+    height: 70vh;
+    background-color: yellow;
+    display: flex;
+    justify-content:center;
+    animation-name: login_div_background;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+}
+@keyframes login_div_background {
+    0%   {background-color: black;}
+  50%  {background-color: yellow;}
+  100% {background-color: black;}
 }
 
 .paymenttt h2{
