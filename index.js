@@ -55,8 +55,15 @@ function logIn(){
     }
 }
 
-// Before the below conditional changes the page, a shallow copy of a menu item must be created
-// This is so that the manager panel can create items
+
+// Menu Page ----------------------------------------------------------
+
+
+// Shallow copy of an uneditable menu item and menu row
+const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
+// console.log(itemTemplate);
+
 
 // This conditional toggles manager edit mode
 if (sessionStorage.getItem("manager") !== "true"){
@@ -67,6 +74,7 @@ if (sessionStorage.getItem("manager") !== "true"){
 else{
     console.log(sessionStorage.getItem("manager"));
     console.log("manager mode");
+    document.body.getElementsByClassName("checkout_btn")[0].remove();
     
     let menuIterative = document.getElementById("menu");
     for (i=1; i<menuIterative.childElementCount; i++){
@@ -81,13 +89,14 @@ else{
             textBox.style.display = "inline";
             menuItem.insertBefore(textBox, menuItem.children[0]);
             let linkInput = document.createElement("textarea");
-            linkInput.placeholder = "Paste new image link here";
+            linkInput.placeholder = "Paste image link here";
             linkInput.style.width = "90%"; linkInput.style.height = "10%";
             linkInput.style.resize = "none"; linkInput.style.display = "none";
             menuItem.insertBefore(linkInput, menuItem.children[2]);
         }
     }
 }
+
 
 // This function toggles display of image link input
 function imgReplace(parameter){
@@ -102,17 +111,44 @@ function imgReplace(parameter){
         }
     }
 }
+
+
+function addItem(){
+    const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
+    const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+    if (document.getElementById("mngrName").value.trim() !== ""){
+        itemTemplate.children[3].firstElementChild.innerHTML = document.getElementById("mngrName").value;
+    }
+    if (document.getElementById("mngrPrice").value.trim() !== ""){
+        itemTemplate.children[3].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
+    }
+    if (document.getElementById("mngrURL").value.trim() !== ""){
+        itemTemplate.children[1].src = document.getElementById("mngrURL").value;
+        itemTemplate.children[1].alt = document.getElementById("mngrURL").value;
+    }
+    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
+        document.getElementById("menu").append(rowTemplate);
+    }
+    console.log(document.getElementById("menu").lastElementChild);
+    document.getElementById("menu").lastElementChild.append(itemTemplate);
+}
+
+
+// Remove item button
+
+
 // Image stays until button press. Link input is appended beneath image and disappears on click away
 // Local storage key and array to remember changes from base file 
 // Function that runs on menu load to reflect manager changes.
 // Key for images, for names, and for prices
 // Reassign local storage keys on button press (call a function)
 // Only reassign image if input box has text in it
-
-function testButton(){}
+// Use local storage to remember item changes
 // Button that saves changes by iterating through, reading values, and updating 
 // innerhtml attribute(s)
 
+
+// Give warning about unsaved changes if user attempts to leave the page
 
 
 
