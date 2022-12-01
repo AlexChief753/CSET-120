@@ -56,13 +56,16 @@ function logIn(){
 }
 
 
+
+
 // Menu Page ----------------------------------------------------------
+
+
 
 
 // Shallow copy of an uneditable menu item and menu row
 const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-// console.log(itemTemplate);
 
 
 // This conditional toggles manager edit mode
@@ -75,7 +78,6 @@ else{
     console.log(sessionStorage.getItem("manager"));
     console.log("manager mode");
     document.body.getElementsByClassName("checkout_btn")[0].remove();
-    
     let menuIterative = document.getElementById("menu");
     for (i=1; i<menuIterative.childElementCount; i++){
         let menuRow = menuIterative.children[i];
@@ -93,8 +95,50 @@ else{
             linkInput.style.width = "90%"; linkInput.style.height = "10%";
             linkInput.style.resize = "none"; linkInput.style.display = "none";
             menuItem.insertBefore(linkInput, menuItem.children[2]);
+            // let changeButton = document.createElement("button");
+            // changeButton.setAttribute("onclick", "changeButton();");
+            // let funnyIndex = menuItem.indexOf(menuItem.lastElementChild);
+            // menuItem.insertBefore(changeButton, menuItem.children[funnyIndex]);
+            let removeButton = document.createElement("button");
+            removeButton.innerHTML = "Delete Item"
+            removeButton.setAttribute("onclick", "removeItem(this);") 
+            menuItem.insertBefore(removeButton, menuItem.children[0]);
+            menuItem.lastElementChild.remove();
         }
     }
+}
+
+
+function changeButton(){
+    console.log("change button");
+}
+
+
+function addItem(){
+    const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
+    const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+    if (document.getElementById("mngrName").value.trim() !== ""){
+
+        console.log(itemTemplate.children[3].firstElementChild.innerHTML);
+        // itemTemplate.children[3].firstElementChild.innerHTML = document.getElementById("mngrName").value;
+    }
+    if (document.getElementById("mngrPrice").value.trim() !== ""){
+        itemTemplate.children[3].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
+    }
+    if (document.getElementById("mngrURL").value.trim() !== ""){
+        itemTemplate.children[1].src = document.getElementById("mngrURL").value;
+        itemTemplate.children[1].alt = document.getElementById("mngrURL").value;
+    }
+    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
+        document.getElementById("menu").append(rowTemplate);
+    }
+    console.log(document.getElementById("menu").lastElementChild);
+    document.getElementById("menu").lastElementChild.append(itemTemplate);
+}
+
+
+function removeItem(source){
+    source.parentElement.remove();
 }
 
 
@@ -113,29 +157,9 @@ function imgReplace(parameter){
 }
 
 
-function addItem(){
-    const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-    const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
-    if (document.getElementById("mngrName").value.trim() !== ""){
-        itemTemplate.children[3].firstElementChild.innerHTML = document.getElementById("mngrName").value;
-    }
-    if (document.getElementById("mngrPrice").value.trim() !== ""){
-        itemTemplate.children[3].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
-    }
-    if (document.getElementById("mngrURL").value.trim() !== ""){
-        itemTemplate.children[1].src = document.getElementById("mngrURL").value;
-        itemTemplate.children[1].alt = document.getElementById("mngrURL").value;
-    }
-    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
-        document.getElementById("menu").append(rowTemplate);
-    }
-    console.log(document.getElementById("menu").lastElementChild);
-    document.getElementById("menu").lastElementChild.append(itemTemplate);
-}
-
-
 // Remove item button
-
+// Update references to be element specific, not indexed child references
+// focusout event
 
 // Image stays until button press. Link input is appended beneath image and disappears on click away
 // Local storage key and array to remember changes from base file 
@@ -149,6 +173,8 @@ function addItem(){
 
 
 // Give warning about unsaved changes if user attempts to leave the page
+// Option to add item to end or to beginning (the end is way easier)
+// Drag and drop item reorganization
 
 
 
