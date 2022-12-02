@@ -264,7 +264,7 @@ function remove_item(a)
 
 
 // CHECKOUT PAGE ---------------------------------------------------------------------------------------
-// function to populate receipt with cart items and total price
+// function to populate receipt with cart items, and total price
 function populate_receipt()
 {
     let elements = document.getElementsByClassName('cart_item');
