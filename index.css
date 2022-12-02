@@ -325,12 +325,12 @@ footer{
 
 .paymenttt{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 50vh;
+    height: 100%;
     width: 100%;
-    background-color: #f5f5f5;
+background-color: gainsboro;
+    padding: 40px;
 }
 
 #logInDiv label
@@ -363,6 +363,9 @@ footer{
 }
 
 .paymenttt h2{
+    height: 30px;
+    width: fit-content;
+    padding: 0;
     font-size: 50px;
     font-weight: bolder;
     color: black;
