@@ -58,110 +58,131 @@ function logIn(){
 
 
 
-// Menu Page ----------------------------------------------------------
+// Menu Page ------------------------------------------------------------------------------
 
-
-
-
-// Shallow copy of an uneditable menu item and menu row
+// Shallow copy of an customer view menu item and menu row
 const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
 
-
-// This conditional toggles manager edit mode
-if (sessionStorage.getItem("manager") !== "true"){
-    console.log(sessionStorage.getItem("manager"));
-    console.log("Customer mode");
-    document.getElementById("managerDiv").remove();
-}
-else{
-    console.log(sessionStorage.getItem("manager"));
-    console.log("manager mode");
-    document.body.getElementsByClassName("checkout_btn")[0].remove();
-    let menuIterative = document.getElementById("menu");
-    for (i=1; i<menuIterative.childElementCount; i++){
-        let menuRow = menuIterative.children[i];
-        for(n=0; n<menuRow.childElementCount; n++){
-            let menuItem = menuRow.children[n];
-            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
-            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
-            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
-            let textBox = document.createElement('strong');
-            textBox.innerHTML = "Click image, name, or price to edit";
-            textBox.style.display = "inline";
-            menuItem.insertBefore(textBox, menuItem.children[0]);
-            let linkInput = document.createElement("textarea");
-            linkInput.placeholder = "Paste image link here";
-            linkInput.style.width = "90%"; linkInput.style.height = "10%";
-            linkInput.style.resize = "none"; linkInput.style.display = "none";
-            menuItem.insertBefore(linkInput, menuItem.children[2]);
-            // let changeButton = document.createElement("button");
-            // changeButton.setAttribute("onclick", "changeButton();");
-            // let funnyIndex = menuItem.indexOf(menuItem.lastElementChild);
-            // menuItem.insertBefore(changeButton, menuItem.children[funnyIndex]);
-            let removeButton = document.createElement("button");
-            removeButton.innerHTML = "Delete Item"
-            removeButton.setAttribute("onclick", "removeItem(this);") 
-            menuItem.insertBefore(removeButton, menuItem.children[0]);
-            menuItem.lastElementChild.remove();
-        }
-    }
+function draggableItems(){
+    for (i of document.getElementsByClassName("menu_item")){
+        i.setAttribute("draggable", "true");
+     }
 }
 
-
-function changeButton(){
-    console.log("change button");
-}
-
-
+// Fix this????? Idk lmao
 function addItem(){
-    const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-    const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+    let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
     if (document.getElementById("mngrName").value.trim() !== ""){
-
-        console.log(itemTemplate.children[3].firstElementChild.innerHTML);
-        // itemTemplate.children[3].firstElementChild.innerHTML = document.getElementById("mngrName").value;
+        itemTemplateCopy.children[5].firstElementChild.innerHTML = document.getElementById("mngrName").value;
     }
     if (document.getElementById("mngrPrice").value.trim() !== ""){
-        itemTemplate.children[3].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
+        itemTemplateCopy.children[5].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
     }
     if (document.getElementById("mngrURL").value.trim() !== ""){
-        itemTemplate.children[1].src = document.getElementById("mngrURL").value;
-        itemTemplate.children[1].alt = document.getElementById("mngrURL").value;
+        console.log(itemTemplateCopy.children[2]);
+        itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
     }
     if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
         document.getElementById("menu").append(rowTemplate);
     }
-    console.log(document.getElementById("menu").lastElementChild);
-    document.getElementById("menu").lastElementChild.append(itemTemplate);
+    itemTemplateCopy.setAttribute("draggable", "true");
+    document.getElementById("menu").lastElementChild.append(itemTemplateCopy);
 }
-
 
 function removeItem(source){
     source.parentElement.remove();
 }
-
 
 // This function toggles display of image link input
 function imgReplace(parameter){
     if(sessionStorage.getItem("manager") === "true"){
         let parameterIndex = Array.from(parameter.parentElement.children).indexOf(parameter);
         let textArea = parameter.parentElement.children[Number(parameterIndex) + 1];
-        if (textArea.style.display === "none"){
+        let imgBtn = parameter.parentElement.children[Number(parameterIndex) + 2];
+        if (textArea.style.display === "none" && imgBtn.style.display === "none"){
             textArea.style.display = "block";
+            imgBtn.style.display = "block";
+
         }
-        else if (textArea.style.display === "block" && textArea.value === ""){
+        else if (textArea.style.display === "block" && textArea.value === "" && imgBtn.style.display === "block"){
             textArea.style.display = "none";
+            imgBtn.style.display = "none";
         }
     }
 }
 
+function changeButton(param){
+    let textAreaInput = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-1].value;
+    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+}
 
-// Remove item button
+function buttonTwo(){
+    document.getElementsByClassName("menu_item").setAttribute("draggable") = true;
+}
+
+
+// Calling functions
+if (sessionStorage.getItem("manager") !== "true"){
+    console.log("Customer mode");
+    document.getElementById("managerDiv").remove();
+}
+else{
+    console.log("Manager mode");
+
+    document.body.getElementsByClassName("checkout_btn")[0].remove();
+    document.getElementsByClassName("menu_buttons")[0].remove();
+
+    let menuIterative = document.getElementById("menu");
+    for (i=1; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+
+            let menuItem = menuRow.children[n];
+            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
+            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
+            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
+
+            let textBox = document.createElement('strong');
+            textBox.innerHTML = "Click image, name, or price to edit";
+            textBox.style.display = "inline";
+            menuItem.insertBefore(textBox, menuItem.children[0]);
+
+            let linkInput = document.createElement("textarea");
+            linkInput.placeholder = "Paste image link here";
+            linkInput.style.width = "90%"; linkInput.style.height = "10%";
+            linkInput.style.resize = "none"; linkInput.style.display = "none";
+            menuItem.insertBefore(linkInput, menuItem.children[2]);
+
+            let removeButton = document.createElement("button");
+            removeButton.innerHTML = "Delete Item"
+            removeButton.setAttribute("onclick", "removeItem(this);") 
+            menuItem.insertBefore(removeButton, menuItem.children[0]);
+            menuItem.lastElementChild.remove();
+
+            let changeButton = document.createElement("button");
+            changeButton.innerHTML = "Preview image";
+            changeButton.style.display = "none";
+            changeButton.setAttribute("onclick", "changeButton(this);");
+            menuItem.insertBefore(changeButton, menuItem.children[4]);
+        }
+    }
+    draggableItems();
+}
+
+const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+
+// What if you could call a function inside other change functions to store the relevant values of your last action?
+// Then it could be "run backwards" to effectively undo it
+// Give warning about unsaved changes if user attempts to leave the page
+// If undo array contains contents, alert manager, else relaod
+// clear undo array when save button clicked or when preview button is clicked
+// Preview image button is replaced by undo button on click, vice versa
+
+
 // Update references to be element specific, not indexed child references
-// focusout event
+// focusout event?
 
-// Image stays until button press. Link input is appended beneath image and disappears on click away
 // Local storage key and array to remember changes from base file 
 // Function that runs on menu load to reflect manager changes.
 // Key for images, for names, and for prices
@@ -172,7 +193,6 @@ function imgReplace(parameter){
 // innerhtml attribute(s)
 
 
-// Give warning about unsaved changes if user attempts to leave the page
 // Option to add item to end or to beginning (the end is way easier)
 // Drag and drop item reorganization
 
