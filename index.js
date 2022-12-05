@@ -83,7 +83,8 @@ function addItem(){
         console.log(itemTemplateCopy.children[2]);
         itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
     }
-    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
+    if (document.getElementById("menu").lastElementChild.childElementCount >= 5) {
+        let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
         document.getElementById("menu").append(rowTemplate);
     }
     itemTemplateCopy.setAttribute("draggable", "true");
@@ -200,18 +201,13 @@ else{
 
 const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 
-// What if you could call a function inside other change functions to store the relevant values of your last action?
-// Then it could be "run backwards" to effectively undo it
+
 // Give warning about unsaved changes if user attempts to leave the page
-// If undo array contains contents, alert manager, else relaod
-// clear undo array when save button clicked or when preview button is clicked
 // Preview image button is replaced by undo button on click, vice versa
-
-
-// Update references to be element specific, not indexed child references
+// Save Button
 // focusout event?
 
-// Local storage key and array to remember changes from base file 
+// Local/Session storage key and array to remember changes from base file 
 // Function that runs on menu load to reflect manager changes.
 // Key for images, for names, and for prices
 // Reassign local storage keys on button press (call a function)
@@ -221,7 +217,7 @@ const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cl
 // innerhtml attribute(s)
 
 
-// Option to add item to end or to beginning (the end is way easier)
+// Option to add item to end or to beginning (the end is way easier) + add row to beginning
 // Drag and drop item reorganization
 
 
