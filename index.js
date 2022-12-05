@@ -115,12 +115,26 @@ function imgReplace(parameter){
 function changeButton(param){
     let textAreaInput = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-1].value;
     param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    sessionStorage.setItem("lastAction", textAreaInput);
+    // console.log(sessionStorage.getItem("lastAction"));
+    param.innerHTML = "Undo";
+    // console.log(param.onclick);
+    param.setattribute("onclick","undoButton();");
+    // console.log(param.onclick);
+
+    // use .item() to get index number, subtract from it
+    // store values; session storage? update button innerhtml and onclick attributes
 }
 
-function buttonTwo(){
-    document.getElementsByClassName("menu_item").setAttribute("draggable") = true;
-}
+// Strangest thing: referring to a child of an HTML Collection using: 
+// Brackets[index] - will return undefined if index is not a number
+// .item() method - will convert the argument to a number and return corresponding element
+// ...Even though index brackets are supposed to just be shorthand for .item()
 
+function undoButton(paaram){
+    console.log("Undo Function called");
+    // access stored values, update image src, update button innerhtml and onclick attributes
+}
 
 // Calling functions
 if (sessionStorage.getItem("manager") !== "true"){
