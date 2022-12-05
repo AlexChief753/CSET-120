@@ -432,7 +432,7 @@ menu
 }
 .menu_item:hover
 {
-    border: 15px solid red;
+    border: 5px dashed red;
 }
 .menu_item img
 {
