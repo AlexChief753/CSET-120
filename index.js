@@ -83,7 +83,8 @@ function addItem(){
         console.log(itemTemplateCopy.children[2]);
         itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
     }
-    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
+    if (document.getElementById("menu").lastElementChild.childElementCount >= 5) {
+        let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
         document.getElementById("menu").append(rowTemplate);
     }
     itemTemplateCopy.setAttribute("draggable", "true");
@@ -113,27 +114,41 @@ function imgReplace(parameter){
 }
 
 function changeButton(param){
+    let imageOriginal = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src;
     let textAreaInput = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-1].value;
-    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
-    sessionStorage.setItem("lastAction", textAreaInput);
-    // console.log(sessionStorage.getItem("lastAction"));
+    let menuIterative = document.getElementById("menu");
+    for (i=1; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+            let menuItem = menuRow.children[n];
+            if(menuItem.contains(param) == true){
+                sessionStorage.setItem(i + `${n+1}`, imageOriginal);
+            }
+        }
+    }
     param.innerHTML = "Undo";
-    // console.log(param.onclick);
-    param.setattribute("onclick","undoButton();");
-    // console.log(param.onclick);
-
-    // use .item() to get index number, subtract from it
-    // store values; session storage? update button innerhtml and onclick attributes
+    param.setAttribute("onclick", "undoButton(this);");
+    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
 }
 
-// Strangest thing: referring to a child of an HTML Collection using: 
-// Brackets[index] - will return undefined if index is not a number
-// .item() method - will convert the argument to a number and return corresponding element
-// ...Even though index brackets are supposed to just be shorthand for .item()
+function undoButton(param){
+    let image = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2];
+    let menuIterative = document.getElementById("menu");
+    for (i=1; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+            let menuItem = menuRow.children[n];
+            if(menuItem.contains(param) == true){
+                image.src = sessionStorage.getItem(i+`${n+1}`);
+            }
+        }
+    }
+    param.innerHTML = "Preview Image";
+    param.setAttribute("onclick", "changeButton(this);");
+}
 
-function undoButton(paaram){
-    console.log("Undo Function called");
-    // access stored values, update image src, update button innerhtml and onclick attributes
+function buttonTwo(){
+    console.log("Button two clicked");
 }
 
 // Calling functions
@@ -186,18 +201,13 @@ else{
 
 const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 
-// What if you could call a function inside other change functions to store the relevant values of your last action?
-// Then it could be "run backwards" to effectively undo it
+
 // Give warning about unsaved changes if user attempts to leave the page
-// If undo array contains contents, alert manager, else relaod
-// clear undo array when save button clicked or when preview button is clicked
 // Preview image button is replaced by undo button on click, vice versa
-
-
-// Update references to be element specific, not indexed child references
+// Save Button
 // focusout event?
 
-// Local storage key and array to remember changes from base file 
+// Local/Session storage key and array to remember changes from base file 
 // Function that runs on menu load to reflect manager changes.
 // Key for images, for names, and for prices
 // Reassign local storage keys on button press (call a function)
@@ -207,7 +217,7 @@ const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cl
 // innerhtml attribute(s)
 
 
-// Option to add item to end or to beginning (the end is way easier)
+// Option to add item to end or to beginning (the end is way easier) + add row to beginning
 // Drag and drop item reorganization
 
 
