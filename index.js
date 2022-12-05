@@ -56,88 +56,147 @@ function logIn(){
 }
 
 
-// Menu Page ----------------------------------------------------------
 
 
-// Shallow copy of an uneditable menu item and menu row
+// Menu Page ------------------------------------------------------------------------------
+
+// Shallow copy of an customer view menu item and menu row
 const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-// console.log(itemTemplate);
 
-
-// This conditional toggles manager edit mode
-if (sessionStorage.getItem("manager") !== "true"){
-    console.log(sessionStorage.getItem("manager"));
-    console.log("Customer mode");
-    document.getElementById("managerDiv").remove();
+function draggableItems(){
+    for (i of document.getElementsByClassName("menu_item")){
+        i.setAttribute("draggable", "true");
+     }
 }
-else{
-    console.log(sessionStorage.getItem("manager"));
-    console.log("manager mode");
-    document.body.getElementsByClassName("checkout_btn")[0].remove();
-    
-    let menuIterative = document.getElementById("menu");
-    for (i=1; i<menuIterative.childElementCount; i++){
-        let menuRow = menuIterative.children[i];
-        for(n=0; n<menuRow.childElementCount; n++){
-            let menuItem = menuRow.children[n];
-            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
-            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
-            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
-            let textBox = document.createElement('strong');
-            textBox.innerHTML = "Click image, name, or price to edit";
-            textBox.style.display = "inline";
-            menuItem.insertBefore(textBox, menuItem.children[0]);
-            let linkInput = document.createElement("textarea");
-            linkInput.placeholder = "Paste image link here";
-            linkInput.style.width = "90%"; linkInput.style.height = "10%";
-            linkInput.style.resize = "none"; linkInput.style.display = "none";
-            menuItem.insertBefore(linkInput, menuItem.children[2]);
-        }
+
+// Fix this????? Idk lmao
+function addItem(){
+    let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
+    if (document.getElementById("mngrName").value.trim() !== ""){
+        itemTemplateCopy.children[5].firstElementChild.innerHTML = document.getElementById("mngrName").value;
     }
+    if (document.getElementById("mngrPrice").value.trim() !== ""){
+        itemTemplateCopy.children[5].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
+    }
+    if (document.getElementById("mngrURL").value.trim() !== ""){
+        console.log(itemTemplateCopy.children[2]);
+        itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
+    }
+    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
+        document.getElementById("menu").append(rowTemplate);
+    }
+    itemTemplateCopy.setAttribute("draggable", "true");
+    document.getElementById("menu").lastElementChild.append(itemTemplateCopy);
 }
 
+function removeItem(source){
+    source.parentElement.remove();
+}
 
 // This function toggles display of image link input
 function imgReplace(parameter){
     if(sessionStorage.getItem("manager") === "true"){
         let parameterIndex = Array.from(parameter.parentElement.children).indexOf(parameter);
         let textArea = parameter.parentElement.children[Number(parameterIndex) + 1];
-        if (textArea.style.display === "none"){
+        let imgBtn = parameter.parentElement.children[Number(parameterIndex) + 2];
+        if (textArea.style.display === "none" && imgBtn.style.display === "none"){
             textArea.style.display = "block";
+            imgBtn.style.display = "block";
+
         }
-        else if (textArea.style.display === "block" && textArea.value === ""){
+        else if (textArea.style.display === "block" && textArea.value === "" && imgBtn.style.display === "block"){
             textArea.style.display = "none";
+            imgBtn.style.display = "none";
         }
     }
 }
 
+function changeButton(param){
+    let textAreaInput = param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-1].value;
+    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    sessionStorage.setItem("lastAction", textAreaInput);
+    // console.log(sessionStorage.getItem("lastAction"));
+    param.innerHTML = "Undo";
+    // console.log(param.onclick);
+    param.setattribute("onclick","undoButton();");
+    // console.log(param.onclick);
 
-function addItem(){
-    const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-    const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
-    if (document.getElementById("mngrName").value.trim() !== ""){
-        itemTemplate.children[3].firstElementChild.innerHTML = document.getElementById("mngrName").value;
-    }
-    if (document.getElementById("mngrPrice").value.trim() !== ""){
-        itemTemplate.children[3].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
-    }
-    if (document.getElementById("mngrURL").value.trim() !== ""){
-        itemTemplate.children[1].src = document.getElementById("mngrURL").value;
-        itemTemplate.children[1].alt = document.getElementById("mngrURL").value;
-    }
-    if (document.getElementById("menu").lastElementChild.childElementCount === 5) {
-        document.getElementById("menu").append(rowTemplate);
-    }
-    console.log(document.getElementById("menu").lastElementChild);
-    document.getElementById("menu").lastElementChild.append(itemTemplate);
+    // use .item() to get index number, subtract from it
+    // store values; session storage? update button innerhtml and onclick attributes
 }
 
+// Strangest thing: referring to a child of an HTML Collection using: 
+// Brackets[index] - will return undefined if index is not a number
+// .item() method - will convert the argument to a number and return corresponding element
+// ...Even though index brackets are supposed to just be shorthand for .item()
 
-// Remove item button
+function undoButton(paaram){
+    console.log("Undo Function called");
+    // access stored values, update image src, update button innerhtml and onclick attributes
+}
+
+// Calling functions
+if (sessionStorage.getItem("manager") !== "true"){
+    console.log("Customer mode");
+    document.getElementById("managerDiv").remove();
+}
+else{
+    console.log("Manager mode");
+
+    document.body.getElementsByClassName("checkout_btn")[0].remove();
+    document.getElementsByClassName("menu_buttons")[0].remove();
+
+    let menuIterative = document.getElementById("menu");
+    for (i=1; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+
+            let menuItem = menuRow.children[n];
+            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
+            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
+            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
+
+            let textBox = document.createElement('strong');
+            textBox.innerHTML = "Click image, name, or price to edit";
+            textBox.style.display = "inline";
+            menuItem.insertBefore(textBox, menuItem.children[0]);
+
+            let linkInput = document.createElement("textarea");
+            linkInput.placeholder = "Paste image link here";
+            linkInput.style.width = "90%"; linkInput.style.height = "10%";
+            linkInput.style.resize = "none"; linkInput.style.display = "none";
+            menuItem.insertBefore(linkInput, menuItem.children[2]);
+
+            let removeButton = document.createElement("button");
+            removeButton.innerHTML = "Delete Item"
+            removeButton.setAttribute("onclick", "removeItem(this);") 
+            menuItem.insertBefore(removeButton, menuItem.children[0]);
+            menuItem.lastElementChild.remove();
+
+            let changeButton = document.createElement("button");
+            changeButton.innerHTML = "Preview image";
+            changeButton.style.display = "none";
+            changeButton.setAttribute("onclick", "changeButton(this);");
+            menuItem.insertBefore(changeButton, menuItem.children[4]);
+        }
+    }
+    draggableItems();
+}
+
+const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+
+// What if you could call a function inside other change functions to store the relevant values of your last action?
+// Then it could be "run backwards" to effectively undo it
+// Give warning about unsaved changes if user attempts to leave the page
+// If undo array contains contents, alert manager, else relaod
+// clear undo array when save button clicked or when preview button is clicked
+// Preview image button is replaced by undo button on click, vice versa
 
 
-// Image stays until button press. Link input is appended beneath image and disappears on click away
+// Update references to be element specific, not indexed child references
+// focusout event?
+
 // Local storage key and array to remember changes from base file 
 // Function that runs on menu load to reflect manager changes.
 // Key for images, for names, and for prices
@@ -148,7 +207,8 @@ function addItem(){
 // innerhtml attribute(s)
 
 
-// Give warning about unsaved changes if user attempts to leave the page
+// Option to add item to end or to beginning (the end is way easier)
+// Drag and drop item reorganization
 
 
 
