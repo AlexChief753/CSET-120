@@ -388,19 +388,20 @@ manager p {}
 
 #menu_cart
 {
-    
+    display: flex;
 }
 .carto{
     display: flex;
 }
 menu
 {
-    width: 71.7%;
+    width: 80%;
     border: 5px solid black;
-    animation-name: menu_background;
+    /* animation-name: menu_background;
     animation-duration: 180s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
     padding: 20px;
+    background-color: yellow;
 }
 
 @keyframes menu_background {
@@ -457,26 +458,24 @@ menu
 
 /* cart */
 cart{
-    width: 25%;
     border: 1px solid black;
     background-color: black;
     color: white;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    height: 99vh;
-    
+    overflow-y:scroll;
+    overflow-x:hidden;
+    width: 20%;
+    margin: 16px 0px;
 }
-#cart_table tr
-{
-    /* display: flex;
+
+input[type='number']{
+    width: 50px;
+} 
+
+#cart_table tr{
+    display: flex;
     justify-content: space-between;
-    width: 200px; */
 }
-.cartinfo
-{
-    
-}
+
 .money
 {
     display: flex;

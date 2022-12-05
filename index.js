@@ -249,6 +249,7 @@ function add_cart(a)
         new_item_name.innerHTML = a.name;
         //input
         let new_item_quantity = document.createElement("td");
+        new_item_quantity.classList.add('input_box'); // add class name
         let selector = document.createElement("input");
         selector.type = "number"; selector.value = 1; selector.price = a.value; // setting attribute values
         selector.onchange = function() {update_quantity(this)};
