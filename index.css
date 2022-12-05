@@ -388,18 +388,35 @@ manager p {}
 
 #menu_cart
 {
-    /* display: flex;
-    justify-content: space-between; */
-    width: 100%;
+    
 }
 .carto{
     display: flex;
 }
 menu
 {
-    width: 70%;
-    border: 1px solid black;
+    width: 71.7%;
+    border: 5px solid black;
+    animation-name: menu_background;
+    animation-duration: 180s;
+    animation-iteration-count: infinite;
+    padding: 20px;
 }
+
+@keyframes menu_background {
+    0%{background-color: yellow;}
+    50%{background-color: yellow;}
+    100%{background-color: yellow;}
+
+}
+
+#menu h1
+{
+    text-align: center;
+    font-family: Brush Script MT, Brush Script Std;
+    font-size: 50px;
+}
+
 .menu_row
 {
     display: flex;
@@ -408,10 +425,14 @@ menu
 {
     width: 20%;
     border: 5px solid black;
+    background-color: black;
+    color: white;
+    font-family: OCR A Std, monospace;
+    
 }
 .menu_item:hover
 {
-    border: 5px solid red;
+    border: 5px dashed red;
 }
 .menu_item img
 {
@@ -421,8 +442,8 @@ menu
 .menu_item button
 {
     width: 100%;
-    background-color: black;
-    color: white;
+    background-color: yellow;
+    color: black;
 }
 .menu_item button:hover
 {
@@ -437,15 +458,13 @@ menu
 /* cart */
 cart{
     width: 25%;
-    margin-top:12px;
     border: 1px solid black;
-    padding: 5px;
     background-color: black;
     color: white;
     position: fixed;
     bottom: 0;
     right: 0;
-    height: 80vh;
+    height: 99vh;
     
 }
 #cart_table tr
