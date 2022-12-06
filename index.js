@@ -166,40 +166,58 @@ else{
     for (i=1; i<menuIterative.childElementCount; i++){
         let menuRow = menuIterative.children[i];
         for(n=0; n<menuRow.childElementCount; n++){
+            if(i===1){
+                let menuItem = menuRow.children[n];
+                menuItem.firstElementChild.setAttribute("contenteditable", true);
+                menuItem.lastElementChild.setAttribute("contenteditable", true);
 
-            let menuItem = menuRow.children[n];
-            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
-            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
-            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
+                let textBox = document.createElement('strong');
+                textBox.innerHTML = "Click name or price to edit";
+                textBox.style.display = "inline";
+                menuItem.insertBefore(textBox, menuItem.children[0]);
 
-            let textBox = document.createElement('strong');
-            textBox.innerHTML = "Click image, name, or price to edit";
-            textBox.style.display = "inline";
-            menuItem.insertBefore(textBox, menuItem.children[0]);
+                let removeButton = document.createElement("button");
+                removeButton.innerHTML = "Delete Item"
+                removeButton.setAttribute("onclick", "removeItem(this);") 
+                menuItem.insertBefore(removeButton, menuItem.children[0]);
+                menuItem.lastElementChild.remove();
+            }
 
-            let linkInput = document.createElement("textarea");
-            linkInput.placeholder = "Paste image link here";
-            linkInput.style.width = "90%"; linkInput.style.height = "10%";
-            linkInput.style.resize = "none"; linkInput.style.display = "none";
-            menuItem.insertBefore(linkInput, menuItem.children[2]);
+            else{
+                let menuItem = menuRow.children[n];
+                menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
+                menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
+                menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
 
-            let removeButton = document.createElement("button");
-            removeButton.innerHTML = "Delete Item"
-            removeButton.setAttribute("onclick", "removeItem(this);") 
-            menuItem.insertBefore(removeButton, menuItem.children[0]);
-            menuItem.lastElementChild.remove();
+                let textBox = document.createElement('strong');
+                textBox.innerHTML = "Click image, name, or price to edit";
+                textBox.style.display = "inline";
+                menuItem.insertBefore(textBox, menuItem.children[0]);
 
-            let changeButton = document.createElement("button");
-            changeButton.innerHTML = "Preview image";
-            changeButton.style.display = "none";
-            changeButton.setAttribute("onclick", "changeButton(this);");
-            menuItem.insertBefore(changeButton, menuItem.children[4]);
+                let linkInput = document.createElement("textarea");
+                linkInput.placeholder = "Paste image link here";
+                linkInput.style.width = "90%"; linkInput.style.height = "10%";
+                linkInput.style.resize = "none"; linkInput.style.display = "none";
+                menuItem.insertBefore(linkInput, menuItem.children[2]);
+
+                let removeButton = document.createElement("button");
+                removeButton.innerHTML = "Delete Item"
+                removeButton.setAttribute("onclick", "removeItem(this);") 
+                menuItem.insertBefore(removeButton, menuItem.children[0]);
+                menuItem.lastElementChild.remove();
+
+                let changeButton = document.createElement("button");
+                changeButton.innerHTML = "Preview image";
+                changeButton.style.display = "none";
+                changeButton.setAttribute("onclick", "changeButton(this);");
+                menuItem.insertBefore(changeButton, menuItem.children[4]);
+            }
         }
     }
     draggableItems();
 }
 
-const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(true);
 
 
 // Give warning about unsaved changes if user attempts to leave the page
