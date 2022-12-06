@@ -556,7 +556,7 @@ input[type='number']{
     font-family: Comic Sans MS, Comic Sans, cursive
 }
 
-/* #about_us_imgs
+#about_us_imgs
 {
     display: flex;
 }
@@ -567,7 +567,7 @@ input[type='number']{
 }
 
 /* Receipt Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-#receipt{
+/* #receipt{
     box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     padding:6mm;
     margin: 0 auto;
@@ -628,4 +628,4 @@ p{
       height: 120px;
       width: 120px;
       margin: auto;
-  }
+  } */
