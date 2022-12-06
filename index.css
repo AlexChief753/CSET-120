@@ -563,22 +563,11 @@ cart{
     background: #FFF;
 }
 
-h1{
-    font-size: 1.5em;
-    color: #222;
+#receipt h2{
+    font-size: 1em;
   }
 
-h2{
-    font-size: .9em;
-  }
-
-h3{
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em;
-  }
-  
-p{
+#receipt p{
     font-size: .76em;
     color: #666;
     line-height: 1.2em;
@@ -601,7 +590,7 @@ p{
     min-height: 50px;
   }
 
-  table{
+table{
     width: 100%;
     border-collapse: collapse;
   }
@@ -612,8 +601,9 @@ p{
     background: #EEE;
   }
   
-.logo, img{
-      height: 120px;
-      width: 120px;
+.logo img{
+      height: 180px;
+      width: 180px;
       margin: auto;
+      margin-left: 1.5em;
   }

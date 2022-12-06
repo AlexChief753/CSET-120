@@ -291,6 +291,7 @@ function update_cost()
     sales_tax.innerHTML = sales_tax_total;
     let total_cost = document.getElementById("total_cost");
     total_cost.innerHTML = final_cost;
+
 }
 
 function update_quantity(a)
@@ -375,3 +376,12 @@ function populate_receipt()
     let total_cost = document.getElementById("total_cost");
     total_cost.innerHTML = final_cost;
 }
+
+//function to pull all items from cart and add them to the receipt
+// define class and constructor function (optional)
+// define empty array
+// iterate through cart items
+// create object for each item with attributes for data (price, quantity, etc)
+// Push each object to empty array
+// Stringify the array into JSON
+// Push JSON array to local storage
