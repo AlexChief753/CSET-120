@@ -408,7 +408,6 @@ menu
     0%{background-color: yellow;}
     50%{background-color: yellow;}
     100%{background-color: yellow;}
-
 }
 
 #menu h1
@@ -461,31 +460,31 @@ cart{
     border: 1px solid black;
     background-color: black;
     color: white;
-    overflow-y:scroll;
+    /* overflow-y:scroll; */
     overflow-x:hidden;
     width: 20%;
     margin: 16px 0px;
+    text-align: center;
 }
 
 input[type='number']{
-    width: 50px;
+    width: 32px;
 } 
 
 #cart_table tr{
-    display: flex;
-    justify-content: space-between;
+
 }
 
-.money
+/* .money
 {
     display: flex;
     flex-direction: column;
     justify-content: right;
-}
+} */
 .money div
 {
     display: flex;
-    justify-content: right;
+    justify-content: center;
     margin-right: 10px;
 }
 .money div p 
@@ -510,12 +509,12 @@ input[type='number']{
 .checkout_btn button
 {
     width: 100%;
-    background-color: white;
+    background-color: red;
     height: 30px;
 }
 .checkout_btn button:hover
 {
-    background-color: red;
+    border: white solid 3px;
 }
 
 /* About us Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

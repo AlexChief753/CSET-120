@@ -193,7 +193,7 @@
                         <p>Ice Cream</p>
                         <p>$2.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Ice cream" value="2.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Ice cream" value="2.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://www.allrecipes.com/thmb/ZmINPsDQYHTK4B-6PyFjPGrJqjQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/10813-best-chocolate-chip-cookies-mfs-step-7-148-52cdaefcd6e04707863288ded8451075.jpg" alt="">
@@ -201,7 +201,7 @@
                         <p>Cookie</p>
                         <p>$0.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Cookie" value="0.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Cookie" value="0.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://bakingmischief.com/wp-content/uploads/2022/03/milkshake-recipes-square.jpg" alt="">
@@ -209,7 +209,7 @@
                         <p>Milkshake</p>
                         <p>$3.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Milkshake" value="3.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Milkshake" value="3.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Pound_layer_cake.jpg/800px-Pound_layer_cake.jpg" alt="">
@@ -217,7 +217,7 @@
                         <p>Cake</p>
                         <p>$2.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Cake" value="2.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Cake" value="2.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://m.economictimes.com/thumb/msid-72135830,width-1200,height-900,resizemode-4,imgsize-245182/methamphetamine_breaking-bad_istock.jpg" alt="">
@@ -225,7 +225,7 @@
                         <p>Rock candy</p>
                         <p>$19.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Rock candy" value="19.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Rock candy" value="19.99"><b>Add to cart</b></button>
                 </div>
             </div>
             <div class="menu_row">
@@ -235,7 +235,7 @@
                         <p>Water</p>
                         <p>$0.99</p>
                     </div>
-                    <button onclick="add_cart(this)" name="Water" value="0.99">Add to cart</button>
+                    <button onclick="add_cart(this)" name="Water" value="0.99"><b>Add to cart</b></button>
                 </div>
                 <div class="menu_item">
                     <img src="https://www.rd.com/wp-content/uploads/2018/02/1-1.jpg?resize=700,466" alt="">
@@ -275,7 +275,7 @@
       
 
         <cart>
-            <h1>Your order</h1>
+            <h1>Cart</h1>
             <div class="cartinfo">
                 
             <div class="cartinfo">
@@ -284,11 +284,12 @@
                         <th>Item</th>
                         <th>#</th>
                         <th>Price</th>
-                        <th>Remove item</th>
+                        <th>Remove</th>
                     </tr>
                 </table>
             </div>
             <div class="money">
+                <hr>
                 <div>
                     <p>Subtotal:</p>
                     <p id="sub_total_cost"></p>
@@ -298,14 +299,15 @@
                     <p id="sales_tax"></p>
                 </div>
                 <div>
-                    <p>Total:</p>
+                    <p><b>Total:</b></p>
                     <p id="total_cost"></p>
                 </div>
+                <hr>
             </div>
 
             <div class="cart_buttons">
-                <button onclick="clear_cart()">Clear Cart</button>
-                <button>Add Promo Code</button>
+                <button onclick="clear_cart()"><b>Clear Cart</b></button>
+                <button><b>Add Promo Code</b></button>
             </div>
             <div class="checkout_btn">
                 <button><b>Checkout</b></button>
