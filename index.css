@@ -1,6 +1,8 @@
 /* CSS File */
 /* Home Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
+body{
+    background-color: black;
+}
 header{
     background-repeat: no-repeat;
     background-color: yellow;
@@ -80,7 +82,7 @@ header, ul{
     justify-content: center;
     align-items: center;
     background-color: black;
-    border-top: white solid 2px;
+    border: white solid 2px;
 }
 
 .login_buttons button:hover{
@@ -335,20 +337,6 @@ footer{
     margin: 5px;
     text-align: center;
 }
-
-
-/* Payment Page *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-.paymenttt{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-background-color: gainsboro;
-    padding: 40px;
-}
-
 #logInDiv label
 {
     color: white;
@@ -386,6 +374,31 @@ background-color: gainsboro;
     font-weight: bolder;
     color: black;
 }
+
+
+
+/* Payment Page *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+.paymenttt{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: yellow;
+    padding: 40px;
+}
+.card-details{
+    
+}
+
+.nameholder-info{
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+  
+}
+
 /* Menu Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -473,13 +486,12 @@ menu
 
 /* cart */
 cart{
-    border: 1px solid black;
+    border: 1px solid white;
     background-color: black;
     color: white;
-    /* overflow-y:scroll; */
-    overflow-x:hidden;
     width: 20%;
     margin: 16px 0px;
+    padding: 5px;
     text-align: center;
 }
 
@@ -525,6 +537,14 @@ input[type='number']{
 {
     border: white solid 3px;
 }
+
+.green_text
+{
+    color: lightgreen;
+    font-size: medium;
+    margin: 0;
+}
+
 
 /* About us Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #about_us

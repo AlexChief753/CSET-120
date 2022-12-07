@@ -339,6 +339,14 @@ function clear_cart()
         elements[0].parentNode.removeChild(elements[0]);
     }
     update_cost();
+    document.getElementById("add_promo").disabled = false;
+    let delete_promo_box = document.getElementById("promo_code");
+    let delete_green_text = document.getElementById("promo_text");
+    delete_green_text.removeChild(delete_green_text.childNodes[0]);
+    while(delete_promo_box.hasChildNodes)
+    {
+        delete_promo_box.removeChild(delete_promo_box.childNodes[0]);
+    }
 }
 
 function remove_item(a)
@@ -375,8 +383,26 @@ function promo_code()
     {
         total.innerHTML = (Number(total.innerHTML) * 0.9).toFixed(2);
         document.getElementsByClassName("promo_btn")[0].disabled = true;
+        //creating text
+        let green_text = document.createElement("p"); 
+        green_text.classList.add("green_text");
+        green_text.innerHTML = "You saved 10%!";
+        //appending under total
+        let location = document.getElementById("promo_text");
+        location.append(green_text);
 
-        let text 
+    }
+    else if(code[0].value === "test")
+    {
+        total.innerHTML = (Number(total.innerHTML) * 0.95).toFixed(2);
+        document.getElementsByClassName("promo_btn")[0].disabled = true;
+        //creating text
+        let green_text = document.createElement("p"); 
+        green_text.classList.add("green_text");
+        green_text.innerHTML = "You saved 5%!";
+        //appending under total
+        let location = document.getElementById("promo_text");
+        location.append(green_text);
     }
     else{
         alert("That code is no longer valid");
@@ -425,4 +451,43 @@ function populate_receipt()
     sales_tax.innerHTML = sales_tax_total;
     let total_cost = document.getElementById("total_cost");
     total_cost.innerHTML = final_cost;
+}
+
+//function to pull all items from cart and add them to the receipt
+// define class and constructor function (optional)
+// define empty array
+// iterate through cart items
+// create object for each item with attributes for data (price, quantity, etc)
+// Push each object to empty array
+// Stringify the array into JSON
+// Push JSON array to local storage
+
+function payment_page()
+{
+    var cart_transfer = [];  //make empty array
+    //add to array
+    let elements = document.getElementsByClassName('cart_item');
+    for(x = 0; x < elements.length; x++)
+    {
+        cart_transfer.push(elements[x]);
+    }
+    console.log(cart_transfer);
+
+    const cart_transfer_json = cart_transfer.map((o) => JSON.stringify(o));
+    console.log(cart_transfer_json);
+
+    // var myRows = [];
+    // var $headers = $("th");
+    // var $rows = $("tbody tr").each(function(index) {
+    // $cells = $(this).find("td");
+    // myRows[index] = {};
+    // $cells.each(function(cellIndex) {
+    //     myRows[index][$($headers[cellIndex]).html()] = $(this).html();
+    // });    
+    // });
+
+    // // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+    // var myObj = {};
+    // myObj.myrows = myRows;
+    // alert(JSON.stringify(myObj));
 }
