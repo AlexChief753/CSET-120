@@ -302,13 +302,18 @@
                     <p><b>Total:</b></p>
                     <p id="total_cost"></p>
                 </div>
+                <div id="promo_text"></div>
                 <hr>
             </div>
 
             <div class="cart_buttons">
                 <button onclick="clear_cart()"><b>Clear Cart</b></button>
-                <button><b>Add Promo Code</b></button>
+                <button id="add_promo" onclick="add_promo_code_input()"><b>Add Promo Code</b></button>
             </div>
+            <div id="promo_code">
+
+            </div>
+            <br>
             <div class="checkout_btn">
                 <button><b>Checkout</b></button>
             </div>

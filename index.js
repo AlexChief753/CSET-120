@@ -349,7 +349,39 @@ function remove_item(a)
 }
 
 
+// Promo code
+function add_promo_code_input()
+{
+    // create input and button
+    let promo = document.createElement("input");
+    let promo_button = document.createElement("button");
 
+    promo_button.onclick = function() {promo_code()};
+    promo_button.classList.add('promo_btn'); // add class name
+    promo_button.innerHTML = "<b>Submit</b>";
+
+    promo.innerHTML = "Enter your code";
+    promo.classList.add('promo_box'); // add class name
+    let location = document.getElementById("promo_code")
+    location.append(promo);
+    location.append(promo_button);
+    document.getElementById("add_promo").disabled = true;
+}
+function promo_code()
+{
+    let code = document.getElementsByClassName("promo_box");
+    let total = document.getElementById("total_cost");
+    if(code[0].value === "NEWCUSTOMER")
+    {
+        total.innerHTML = (Number(total.innerHTML) * 0.9).toFixed(2);
+        document.getElementsByClassName("promo_btn")[0].disabled = true;
+
+        let text 
+    }
+    else{
+        alert("That code is no longer valid");
+    }
+}
 
 
 // CHECKOUT PAGE ---------------------------------------------------------------------------------------
