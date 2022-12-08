@@ -185,6 +185,7 @@ function test() {
 // and each of the contained arrays will contain item objects
 // If a row has no items, delete it
 // Default page code will need to change, render code needs to change, reset button needs to change
+// If row has less than 5 items and is not the last row, take items from row below it and repeat 
 
 // Set a default menu page to revert to
 let menuObjDefaultArr = [];
