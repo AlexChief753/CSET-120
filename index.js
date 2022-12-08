@@ -70,7 +70,6 @@ function draggableItems(){
      }
 }
 
-// Fix this????? Idk lmao
 function addItem(){
     let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
     if (document.getElementById("mngrName").value.trim() !== ""){
@@ -126,9 +125,11 @@ function changeButton(param){
             }
         }
     }
-    param.innerHTML = "Undo";
-    param.setAttribute("onclick", "undoButton(this);");
-    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    if(textAreaInput.trim() !== ""){
+        param.innerHTML = "Undo";
+        param.setAttribute("onclick", "undoButton(this);");
+        param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    }
 }
 
 function undoButton(param){
@@ -143,15 +144,103 @@ function undoButton(param){
             }
         }
     }
-    param.innerHTML = "Preview Image";
+    param.innerHTML = "Set Image";
     param.setAttribute("onclick", "changeButton(this);");
 }
 
-function buttonTwo(){
-    console.log("Button two clicked");
+function saveButton(){
+    let menuObjArr = [];
+    let menuIterative = document.getElementById("menu");
+    for (i=2; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+            let menuItem = menuRow.children[n];
+            let src = menuItem.children[2].src;
+            let name = menuItem.lastElementChild.firstElementChild.innerHTML;
+            let price = menuItem.lastElementChild.lastElementChild.innerHTML;
+            let itemObj = new MenuItem(src, name, price);
+            menuObjArr.push(itemObj);
+        }
+    }
+    localStorage.setItem("itemJSON", JSON.stringify(menuObjArr));
 }
 
-// Calling functions
+class MenuItem {
+    constructor(link, name, price) {
+        this.link = link;
+        this.name = name;
+        this.price = price;
+    }
+}
+ 
+function reset() {
+    localStorage.setItem("itemJSON", localStorage.getItem("defaultJSON"));
+    location.reload();
+}
+
+function test() {
+    console.log("test button clicked");
+}
+
+// Calling functions:
+
+// Set a default menu page to revert to
+let menuObjDefaultArr = [];
+let menuIterative = document.getElementById("menu");
+for (i=2; i<menuIterative.childElementCount; i++){
+    let menuRow = menuIterative.children[i];
+    for(n=0; n<menuRow.childElementCount; n++){
+        let menuItem = menuRow.children[n];
+        let src = menuItem.children[0].src;
+        let name = menuItem.children[1].firstElementChild.innerHTML;
+        let price = menuItem.children[1].lastElementChild.innerHTML;
+        let itemObj = new MenuItem(src, name, price);
+        menuObjDefaultArr.push(itemObj);
+    }
+}
+localStorage.setItem("defaultJSON", JSON.stringify(menuObjDefaultArr));
+
+// Edit item quantity from original to match saved changes
+if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2 === true){
+    console.log((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4);
+    console.log(JSON.parse(localStorage.getItem("itemJSON")).length / 5);
+    for (i=0; i < ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4); i++){
+        console.log("Hi");
+    }
+    while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2) {
+        let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
+        menuIterative.append(rowTemplate);
+        let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+        for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
+            rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
+        }
+        // iterate through all rows added beyond default and append five children
+        // Use this loop for only the last row
+        // Use for loop so that you have an i value to work with - when i === value
+        // length /5 .floor +1
+    }
+}
+else {
+    while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 < menuIterative.childElementCount - 2) {
+        let menuIterative = document.getElementById("menu");
+        menuIterative.lastElementChild.remove();
+    }
+}
+
+// Redefines item properties
+let q = 0;
+for (i=2; i<menuIterative.childElementCount; i++){
+let menuRow = menuIterative.children[i];
+    for(n=0; n<menuRow.childElementCount; n++){
+        let menuItem = menuRow.children[n];
+        menuItem.children[0].src = JSON.parse(localStorage.getItem("itemJSON"))[q].link;
+        menuItem.children[1].firstElementChild.innerHTML = JSON.parse(localStorage.getItem("itemJSON"))[q].name;
+        menuItem.children[1].lastElementChild.innerHTML= JSON.parse(localStorage.getItem("itemJSON"))[q].price;
+        if (q<JSON.parse(localStorage.getItem("itemJSON")).length-1){q++;}
+    }
+}
+
+// -Manager mode conditional
 if (sessionStorage.getItem("manager") !== "true"){
     console.log("Customer mode");
     document.getElementById("managerDiv").remove();
@@ -207,7 +296,7 @@ else{
                 menuItem.lastElementChild.remove();
 
                 let changeButton = document.createElement("button");
-                changeButton.innerHTML = "Preview image";
+                changeButton.innerHTML = "Set image";
                 changeButton.style.display = "none";
                 changeButton.setAttribute("onclick", "changeButton(this);");
                 menuItem.insertBefore(changeButton, menuItem.children[4]);
