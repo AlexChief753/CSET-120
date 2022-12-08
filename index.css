@@ -96,7 +96,7 @@ img{
 }
 
 #deals{
-    height: 300px;
+    height: 204px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -105,43 +105,44 @@ img{
 
 .d1
 {
-    width: 300px;
-    height: 300px;
-    border: 2px solid black;
-    font-size: xx-large;
-    background-color: yellow;
-    margin: 15px;
+    width: 100%;
+    height: 200px;
+    border: 2px solid white;
+    font-size: x-large;
+    background-color: black;
+    margin: 0px;
     text-align: center;
 }
 
 .d1 p{
-    font-size: 40px;
-    font-weight: bolder;
-    color: red;
+    font-size: 30px;
+    /* font-weight: bolder; */
+    color: white;
     align-items: center;
+    height: 100%;
+    font-family: fantasy;
 }
 
 .dealsss
 {
-    height: 300px;
+    height: 200px;
     width: 98.8%;
     display: flex;
     justify-content: center;
-    font-size: 75px;
+    font-size: 50px;
     animation: deals;
-    animation-duration: 0.4s;
+    animation-duration: 0.7s;
     animation-iteration-count: infinite;
     background-color: yellow;
-    border-top: 10px black solid;
-    border-left: 10px black solid;
-    border-right: 10px black solid;
+    border: 10px black solid;
+    font-family: OCR A Std, monospace;
 }
 
 @keyframes deals
 {
-    0%   {color:blue;}
-    50%   {color:black;}
-    100%   {color:blue;}
+    0%   {color:black;}
+    50%   {color:yellow;}
+    100%   {color:black;}
   }
 
 customerreviews{
@@ -158,6 +159,7 @@ customerreviews{
     animation: review_background 15s;
     animation-iteration-count: infinite;
     border: 10px black solid;
+    font-family: monospace;
 }
 
 
@@ -378,26 +380,62 @@ footer{
 
 
 /* Payment Page *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
+.outer_payment{
+    display: flex;
+    justify-content: center;
+}
 .paymenttt{
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 500px;
     background-color: yellow;
     padding: 40px;
 }
-.card-details{
+.basic_info{
     
 }
 
-.nameholder-info{
+.nameholder-info
+{
     display: flex;
     justify-content: space-between;
-    width: 250px;
-  
+    width: 300px;
+    height: 20px;
+    padding: 5px;
 }
+
+.custom_info
+{
+    display: flex;
+    width: 300px;
+    height: 20px;
+    justify-content: center;
+} 
+
+.custom_info label{
+    padding-right: 10px;
+}
+
+#custom2{
+    width: 50px;
+}
+
+.submit-now-btn
+{
+    width: 200px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+}
+.submit-now-btn:hover{
+    border: red solid 3px;
+    color: red;
+}
+
 
 /* Menu Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 

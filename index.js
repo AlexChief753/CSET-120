@@ -558,32 +558,3 @@ function populate_receipt()
 // Stringify the array into JSON
 // Push JSON array to local storage
 
-function payment_page()
-{
-    var cart_transfer = [];  //make empty array
-    //add to array
-    let elements = document.getElementsByClassName('cart_item');
-    for(x = 0; x < elements.length; x++)
-    {
-        cart_transfer.push(elements[x]);
-    }
-    console.log(cart_transfer);
-
-    const cart_transfer_json = cart_transfer.map((o) => JSON.stringify(o));
-    console.log(cart_transfer_json);
-
-    // var myRows = [];
-    // var $headers = $("th");
-    // var $rows = $("tbody tr").each(function(index) {
-    // $cells = $(this).find("td");
-    // myRows[index] = {};
-    // $cells.each(function(cellIndex) {
-    //     myRows[index][$($headers[cellIndex]).html()] = $(this).html();
-    // });    
-    // });
-
-    // // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
-    // var myObj = {};
-    // myObj.myrows = myRows;
-    // alert(JSON.stringify(myObj));
-}

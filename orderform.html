@@ -31,40 +31,20 @@
                 <button onclick="location.href='aboutus.html'"><b>About Us</b></button>
             </li>
             <li>
+                <button onclick="location.href='login.html'"><b>Sign In</b></button>
+            </li>
+            <li>
                 <button onclick="location.href='MenuPage.html'"><b>Order Now</b></button>
             </li>             
         </ul>
     </div>
     </header>
-
-    <br>
-    <br>
-    <br>
-
-    <div class="login_buttons">
-
-        <button type="button" class="btn" onclick="">Log in</button>
-
-        <button type="button" class="btn" onclick="">Sign Up</button>
-
-    </div>
-
-    <br>
-    <br>
-
+<div class="outer_payment">
     
     <div class="paymenttt">
-        <h2>Payment Page</h2>
-    <button class="cartinfo">
-        <input type="radio" id="Cash" name="food_payment" value="payment">
-            <label for="Payment_Type">Cash Payment</label>
-            
-          <input type="radio" id="Card" name="food_payment" value="payment">
-                  <label for="Payment_Type">Card</label>
-        </button>
+        <h1>Thank you for your order</h1>
 
-       
-        <div class="card-details">
+        <div class="basic_info">
 
           <div class="nameholder-info">
             <label>Name </label>
@@ -89,47 +69,56 @@
               class="card-name-field"
               placeholder="Enter your phone number"/>
           </div>
+        
+<hr>
+        <div class="custom_info">
+            <label> Payment type </label>
+            <input type="radio" id="card" name="time_option" value="card">
+            <label for="asap">Card</label>
+            <input type="radio" id="cash" name="time_option" value="cash">
+            <label for="custom">Cash</label>
+        </div>
+<hr>
+    </div>
 
+        <div class="credit_card_info">
       
-            <div class="card-number">
+            <div class="nameholder-info">
               <label> Card Number </label>
-              <input
-                type="text"
-                class="card-number-field"
+              <input type="text" class="credit-number-field"
                 placeholder="####-####-####"/>
             </div>
-            <br />
-            <div class="date-number">
+            <div class="nameholder-info">
               <label> Expiry Date </label>
               <input type="text" class="date-number-field" 
                      placeholder="MM-YY" />
             </div>
       
-            <div class="cvv-number">
+            <div class="nameholder-info">
               <label> CVV number </label>
               <input type="text" class="cvv-number-field" 
                      placeholder="xxx" />
             </div>
-   
-            
-            <p>Order Type</p>
-            <p>
+
+            <div class="custom_info">
+                <label> Order Type </label>
                 <input type="radio" id="delivery" name="food_arrival_option" value="delivery">
-                    <label for="delivery">Delivery</label>
+                <label for="delivery">Delivery</label>
                 <input type="radio" id="pickup" name="food_arrival_option" value="pickup">
-                    <label for="pickup">Pick up</label>
-            </p>
-        </div>
-        <div class="cartinfo">
-            <p>Time</p>
-            <p>
+                <label for="pickup">Pick up</label>
+            </div>
+
+            <div class="custom_info">
+                <label> Timeframe </label>
                 <input type="radio" id="asap" name="time_option" value="asap">
-                    <label for="asap">ASAP</label>
+                <label for="asap">ASAP</label>
                 <input type="radio" id="custom" name="time_option" value="custom">
-                    <label for="custom">Custom</label>
-            </p>
+                <label for="custom">Custom <input type="text" id="custom2" name="time_option"></label>
+            </div>
+   
         </div>
-        <button type="submit" class="submit-now-btn">submit</button>
+        
+        <button type="submit" class="submit-now-btn"><b>Submit</b></button>
 
         </div>
           
@@ -140,7 +129,7 @@
     <br>
     <br>
 
-
+</div>
 
     <footer>
       <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14582975.839701343!2d-97.05820559425042!3d42.46431377175252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sus!4v1666102760775!5m2!1sen!2sus" id="gmap" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
