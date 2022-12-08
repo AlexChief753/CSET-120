@@ -70,7 +70,6 @@ function draggableItems(){
      }
 }
 
-// Fix this????? Idk lmao
 function addItem(){
     let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
     if (document.getElementById("mngrName").value.trim() !== ""){
@@ -126,9 +125,11 @@ function changeButton(param){
             }
         }
     }
-    param.innerHTML = "Undo";
-    param.setAttribute("onclick", "undoButton(this);");
-    param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    if(textAreaInput.trim() !== ""){
+        param.innerHTML = "Undo";
+        param.setAttribute("onclick", "undoButton(this);");
+        param.parentElement.children[Array.from(param.parentElement.children).indexOf(param)-2].src = textAreaInput;
+    }
 }
 
 function undoButton(param){
@@ -143,15 +144,103 @@ function undoButton(param){
             }
         }
     }
-    param.innerHTML = "Preview Image";
+    param.innerHTML = "Set Image";
     param.setAttribute("onclick", "changeButton(this);");
 }
 
-function buttonTwo(){
-    console.log("Button two clicked");
+function saveButton(){
+    let menuObjArr = [];
+    let menuIterative = document.getElementById("menu");
+    for (i=2; i<menuIterative.childElementCount; i++){
+        let menuRow = menuIterative.children[i];
+        for(n=0; n<menuRow.childElementCount; n++){
+            let menuItem = menuRow.children[n];
+            let src = menuItem.children[2].src;
+            let name = menuItem.lastElementChild.firstElementChild.innerHTML;
+            let price = menuItem.lastElementChild.lastElementChild.innerHTML;
+            let itemObj = new MenuItem(src, name, price);
+            menuObjArr.push(itemObj);
+        }
+    }
+    localStorage.setItem("itemJSON", JSON.stringify(menuObjArr));
 }
 
-// Calling functions
+class MenuItem {
+    constructor(link, name, price) {
+        this.link = link;
+        this.name = name;
+        this.price = price;
+    }
+}
+ 
+function reset() {
+    localStorage.setItem("itemJSON", localStorage.getItem("defaultJSON"));
+    location.reload();
+}
+
+function test() {
+    console.log("test button clicked");
+}
+
+// Calling functions:
+
+// Set a default menu page to revert to
+let menuObjDefaultArr = [];
+let menuIterative = document.getElementById("menu");
+for (i=2; i<menuIterative.childElementCount; i++){
+    let menuRow = menuIterative.children[i];
+    for(n=0; n<menuRow.childElementCount; n++){
+        let menuItem = menuRow.children[n];
+        let src = menuItem.children[0].src;
+        let name = menuItem.children[1].firstElementChild.innerHTML;
+        let price = menuItem.children[1].lastElementChild.innerHTML;
+        let itemObj = new MenuItem(src, name, price);
+        menuObjDefaultArr.push(itemObj);
+    }
+}
+localStorage.setItem("defaultJSON", JSON.stringify(menuObjDefaultArr));
+
+// Edit item quantity from original to match saved changes
+if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2 === true){
+    console.log((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4);
+    console.log(JSON.parse(localStorage.getItem("itemJSON")).length / 5);
+    for (i=0; i < ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4); i++){
+        console.log("Hi");
+    }
+    while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2) {
+        let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
+        menuIterative.append(rowTemplate);
+        let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+        for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
+            rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
+        }
+        // iterate through all rows added beyond default and append five children
+        // Use this loop for only the last row
+        // Use for loop so that you have an i value to work with - when i === value
+        // length /5 .floor +1
+    }
+}
+else {
+    while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 < menuIterative.childElementCount - 2) {
+        let menuIterative = document.getElementById("menu");
+        menuIterative.lastElementChild.remove();
+    }
+}
+
+// Redefines item properties
+let q = 0;
+for (i=2; i<menuIterative.childElementCount; i++){
+let menuRow = menuIterative.children[i];
+    for(n=0; n<menuRow.childElementCount; n++){
+        let menuItem = menuRow.children[n];
+        menuItem.children[0].src = JSON.parse(localStorage.getItem("itemJSON"))[q].link;
+        menuItem.children[1].firstElementChild.innerHTML = JSON.parse(localStorage.getItem("itemJSON"))[q].name;
+        menuItem.children[1].lastElementChild.innerHTML= JSON.parse(localStorage.getItem("itemJSON"))[q].price;
+        if (q<JSON.parse(localStorage.getItem("itemJSON")).length-1){q++;}
+    }
+}
+
+// -Manager mode conditional
 if (sessionStorage.getItem("manager") !== "true"){
     console.log("Customer mode");
     document.getElementById("managerDiv").remove();
@@ -166,40 +255,58 @@ else{
     for (i=1; i<menuIterative.childElementCount; i++){
         let menuRow = menuIterative.children[i];
         for(n=0; n<menuRow.childElementCount; n++){
+            if(i===1){
+                let menuItem = menuRow.children[n];
+                menuItem.firstElementChild.setAttribute("contenteditable", true);
+                menuItem.lastElementChild.setAttribute("contenteditable", true);
 
-            let menuItem = menuRow.children[n];
-            menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
-            menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
-            menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
+                let textBox = document.createElement('strong');
+                textBox.innerHTML = "Click name or price to edit";
+                textBox.style.display = "inline";
+                menuItem.insertBefore(textBox, menuItem.children[0]);
 
-            let textBox = document.createElement('strong');
-            textBox.innerHTML = "Click image, name, or price to edit";
-            textBox.style.display = "inline";
-            menuItem.insertBefore(textBox, menuItem.children[0]);
+                let removeButton = document.createElement("button");
+                removeButton.innerHTML = "Delete Item"
+                removeButton.setAttribute("onclick", "removeItem(this);") 
+                menuItem.insertBefore(removeButton, menuItem.children[0]);
+                menuItem.lastElementChild.remove();
+            }
 
-            let linkInput = document.createElement("textarea");
-            linkInput.placeholder = "Paste image link here";
-            linkInput.style.width = "90%"; linkInput.style.height = "10%";
-            linkInput.style.resize = "none"; linkInput.style.display = "none";
-            menuItem.insertBefore(linkInput, menuItem.children[2]);
+            else{
+                let menuItem = menuRow.children[n];
+                menuItem.children[1].firstElementChild.setAttribute("contenteditable", true);
+                menuItem.children[1].lastElementChild.setAttribute("contenteditable", true);
+                menuItem.firstElementChild.setAttribute("onclick", "imgReplace(this);");
 
-            let removeButton = document.createElement("button");
-            removeButton.innerHTML = "Delete Item"
-            removeButton.setAttribute("onclick", "removeItem(this);") 
-            menuItem.insertBefore(removeButton, menuItem.children[0]);
-            menuItem.lastElementChild.remove();
+                let textBox = document.createElement('strong');
+                textBox.innerHTML = "Click image, name, or price to edit";
+                textBox.style.display = "inline";
+                menuItem.insertBefore(textBox, menuItem.children[0]);
 
-            let changeButton = document.createElement("button");
-            changeButton.innerHTML = "Preview image";
-            changeButton.style.display = "none";
-            changeButton.setAttribute("onclick", "changeButton(this);");
-            menuItem.insertBefore(changeButton, menuItem.children[4]);
+                let linkInput = document.createElement("textarea");
+                linkInput.placeholder = "Paste image link here";
+                linkInput.style.width = "90%"; linkInput.style.height = "10%";
+                linkInput.style.resize = "none"; linkInput.style.display = "none";
+                menuItem.insertBefore(linkInput, menuItem.children[2]);
+
+                let removeButton = document.createElement("button");
+                removeButton.innerHTML = "Delete Item"
+                removeButton.setAttribute("onclick", "removeItem(this);") 
+                menuItem.insertBefore(removeButton, menuItem.children[0]);
+                menuItem.lastElementChild.remove();
+
+                let changeButton = document.createElement("button");
+                changeButton.innerHTML = "Set image";
+                changeButton.style.display = "none";
+                changeButton.setAttribute("onclick", "changeButton(this);");
+                menuItem.insertBefore(changeButton, menuItem.children[4]);
+            }
         }
     }
     draggableItems();
 }
 
-const mngrItemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
+const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(true);
 
 
 // Give warning about unsaved changes if user attempts to leave the page
@@ -249,6 +356,7 @@ function add_cart(a)
         new_item_name.innerHTML = a.name;
         //input
         let new_item_quantity = document.createElement("td");
+        new_item_quantity.classList.add('input_box'); // add class name
         let selector = document.createElement("input");
         selector.type = "number"; selector.value = 1; selector.price = a.value; // setting attribute values
         selector.onchange = function() {update_quantity(this)};
@@ -321,6 +429,14 @@ function clear_cart()
         elements[0].parentNode.removeChild(elements[0]);
     }
     update_cost();
+    document.getElementById("add_promo").disabled = false;
+    let delete_promo_box = document.getElementById("promo_code");
+    let delete_green_text = document.getElementById("promo_text");
+    delete_green_text.removeChild(delete_green_text.childNodes[0]);
+    while(delete_promo_box.hasChildNodes)
+    {
+        delete_promo_box.removeChild(delete_promo_box.childNodes[0]);
+    }
 }
 
 function remove_item(a)
@@ -331,7 +447,57 @@ function remove_item(a)
 }
 
 
+// Promo code
+function add_promo_code_input()
+{
+    // create input and button
+    let promo = document.createElement("input");
+    let promo_button = document.createElement("button");
 
+    promo_button.onclick = function() {promo_code()};
+    promo_button.classList.add('promo_btn'); // add class name
+    promo_button.innerHTML = "<b>Submit</b>";
+
+    promo.innerHTML = "Enter your code";
+    promo.classList.add('promo_box'); // add class name
+    let location = document.getElementById("promo_code")
+    location.append(promo);
+    location.append(promo_button);
+    document.getElementById("add_promo").disabled = true;
+}
+function promo_code()
+{
+    let code = document.getElementsByClassName("promo_box");
+    let total = document.getElementById("total_cost");
+    if(code[0].value === "NEWCUSTOMER")
+    {
+        total.innerHTML = (Number(total.innerHTML) * 0.9).toFixed(2);
+        document.getElementsByClassName("promo_btn")[0].disabled = true;
+        //creating text
+        let green_text = document.createElement("p"); 
+        green_text.classList.add("green_text");
+        green_text.innerHTML = "You saved 10%!";
+        //appending under total
+        let location = document.getElementById("promo_text");
+        location.append(green_text);
+
+    }
+    else if(code[0].value === "test")
+    {
+        total.innerHTML = (Number(total.innerHTML) * 0.95).toFixed(2);
+        document.getElementsByClassName("promo_btn")[0].disabled = true;
+        //creating text
+        let green_text = document.createElement("p"); 
+        green_text.classList.add("green_text");
+        green_text.innerHTML = "You saved 5%!";
+        //appending under total
+        let location = document.getElementById("promo_text");
+        location.append(green_text);
+    }
+    else{
+        alert("That code is no longer valid");
+    }
+}
 
 
 // CHECKOUT PAGE ---------------------------------------------------------------------------------------
@@ -385,3 +551,33 @@ function populate_receipt()
 // Push each object to empty array
 // Stringify the array into JSON
 // Push JSON array to local storage
+
+function payment_page()
+{
+    var cart_transfer = [];  //make empty array
+    //add to array
+    let elements = document.getElementsByClassName('cart_item');
+    for(x = 0; x < elements.length; x++)
+    {
+        cart_transfer.push(elements[x]);
+    }
+    console.log(cart_transfer);
+
+    const cart_transfer_json = cart_transfer.map((o) => JSON.stringify(o));
+    console.log(cart_transfer_json);
+
+    // var myRows = [];
+    // var $headers = $("th");
+    // var $rows = $("tbody tr").each(function(index) {
+    // $cells = $(this).find("td");
+    // myRows[index] = {};
+    // $cells.each(function(cellIndex) {
+    //     myRows[index][$($headers[cellIndex]).html()] = $(this).html();
+    // });    
+    // });
+
+    // // Let's put this in the object like you want and convert to JSON (Note: jQuery will also do this for you on the Ajax request)
+    // var myObj = {};
+    // myObj.myrows = myRows;
+    // alert(JSON.stringify(myObj));
+}
