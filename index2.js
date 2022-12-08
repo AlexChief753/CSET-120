@@ -26,12 +26,15 @@ function renderReceiptItems() {
         receiptItemsContainer.innerHTML += `
             <div class="receiptItem">
                 <div class="receiptItemInfo">
-                    <p>${receiptItem.name}</p>
+                    <h3>${receiptItem.name}</h3>
                     <p>Qty: ${receiptItem.quantity}</p>
+                    <p class="receiptItemCost">$${receiptItemSubTotal}</p>
                 </div>
-                <p class="receiptItemCost">$${receiptItemSubTotal}</p>
+               
             </div>
         `;
+        // receiptItemstotal += receiptItemSubTotal;
     });
 };
 renderReceiptItems();
+ 

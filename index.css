@@ -603,6 +603,7 @@ input[type='number']{
     font-size: .76em;
     color: #666;
     line-height: 1.2em;
+    display: inline-block;
   }
 
   #top, #mid, #bot{ 
