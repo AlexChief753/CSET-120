@@ -52,13 +52,22 @@
     <br>
     <br>
 
-
+    
     <div class="paymenttt">
         <h2>Payment Page</h2>
+    <button class="cartinfo">
+        <input type="radio" id="Cash" name="food_payment" value="payment">
+            <label for="Payment_Type">Cash Payment</label>
+            
+          <input type="radio" id="Card" name="food_payment" value="payment">
+                  <label for="Payment_Type">Card</label>
+        </button>
+
+       
         <div class="card-details">
 
           <div class="nameholder-info">
-            <label> Card Holder Name </label>
+            <label>Name </label>
             <input
               type="text"
               class="card-name-field"
@@ -66,7 +75,7 @@
           </div>
 
           <div class="nameholder-info">
-            <label> Card Holder Address </label>
+            <label>Address </label>
             <input
               type="text"
               class="card-name-field"
@@ -74,22 +83,13 @@
           </div>
 
           <div class="nameholder-info">
-            <label> Card Holder Phone Number </label>
+            <label>Phone # </label>
             <input
               type="text"
               class="card-name-field"
               placeholder="Enter your phone number"/>
           </div>
 
-          <button class="cartinfo">
-            <input type="radio" id="Cash" name="food_payment" value="payment">
-                <label for="Payment_Type">Cash Payment</label>
-                
-              <input type="radio" id="Card" name="food_payment" value="payment">
-                      <label for="Payment_Type">Card</label>
-        </button>
-
-            <p>Pay using Credit or Debit card</p>
       
             <div class="card-number">
               <label> Card Number </label>
@@ -110,15 +110,29 @@
               <input type="text" class="cvv-number-field" 
                      placeholder="xxx" />
             </div>
+   
             
-            <button type="submit" 
-                    class="submit-now-btn">
-              submit
-            </button>
-           
+            <p>Order Type</p>
+            <p>
+                <input type="radio" id="delivery" name="food_arrival_option" value="delivery">
+                    <label for="delivery">Delivery</label>
+                <input type="radio" id="pickup" name="food_arrival_option" value="pickup">
+                    <label for="pickup">Pick up</label>
+            </p>
+        </div>
+        <div class="cartinfo">
+            <p>Time</p>
+            <p>
+                <input type="radio" id="asap" name="time_option" value="asap">
+                    <label for="asap">ASAP</label>
+                <input type="radio" id="custom" name="time_option" value="custom">
+                    <label for="custom">Custom</label>
+            </p>
+        </div>
+        <button type="submit" class="submit-now-btn">submit</button>
 
-
-          </div>
+        </div>
+          
 
     </div>
 
