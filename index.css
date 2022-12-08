@@ -378,26 +378,62 @@ footer{
 
 
 /* Payment Page *------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
+.outer_payment{
+    display: flex;
+    justify-content: center;
+}
 .paymenttt{
     display: flex;
     align-items: center;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 500px;
     background-color: yellow;
     padding: 40px;
 }
-.card-details{
+.basic_info{
     
 }
 
-.nameholder-info{
+.nameholder-info
+{
     display: flex;
     justify-content: space-between;
-    width: 250px;
-  
+    width: 300px;
+    height: 20px;
+    padding: 5px;
 }
+
+.custom_info
+{
+    display: flex;
+    width: 300px;
+    height: 20px;
+    justify-content: center;
+} 
+
+.custom_info label{
+    padding-right: 10px;
+}
+
+#custom2{
+    width: 50px;
+}
+
+.submit-now-btn
+{
+    width: 200px;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 15px;
+    background-color: black;
+    color: white;
+}
+.submit-now-btn:hover{
+    border: red solid 3px;
+    color: red;
+}
+
 
 /* Menu Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
