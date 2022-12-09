@@ -27,8 +27,6 @@ function signUp() {
         }
     }
     if(status === true) {
-        console.log(userEmail);
-        console.log(infoArray);   
         localStorage.setItem(userEmail, infoArray);
         window.location.href = "MenuPage.html";
     }
@@ -37,7 +35,6 @@ function signUp() {
 function logIn(){
     if(logInDiv.children[1].value === "gustavo" && logInDiv.children[3].value === "fring"){
         sessionStorage.setItem("manager", "true");
-        console.log(sessionStorage.getItem("manager"));
         alert("Manager login successful. Entering menu edit mode.");
         window.location.href ="MenuPage.html";
     }
@@ -46,8 +43,6 @@ function logIn(){
     }
     else if (localStorage.getItem(logInDiv.children[1].value) === logInDiv.children[3].value){
         sessionStorage.setItem("manager", "false");
-        console.log(sessionStorage.getItem("manager"));
-        alert("Successful Login.");
         window.location.href = "MenuPage.html";
     }
     else if (localStorage.getItem(logInDiv.children[1].value) === null){
@@ -63,11 +58,12 @@ function logIn(){
 // Shallow copy of an customer view menu item and menu row
 const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-
-function draggableItems(){
-    for (i of document.getElementsByClassName("menu_item")){
-        i.setAttribute("draggable", "true");
-     }
+class MenuItem {
+    constructor(link, name, price) {
+        this.link = link;
+        this.name = name;
+        this.price = price;
+    }
 }
 
 function addItem(){
@@ -164,18 +160,18 @@ function saveButton(){
     }
     localStorage.setItem("itemJSON", JSON.stringify(menuObjArr));
 }
-
-class MenuItem {
-    constructor(link, name, price) {
-        this.link = link;
-        this.name = name;
-        this.price = price;
-    }
-}
  
 function reset() {
-    localStorage.setItem("itemJSON", localStorage.getItem("defaultJSON"));
-    location.reload();
+    if (confirm("Are you sure? All changes will be lost!") === true){
+        localStorage.setItem("itemJSON", localStorage.getItem("defaultJSON"));
+        location.reload();
+    }
+}
+
+function draggableItems(){
+    for (i of document.getElementsByClassName("menu_item")){
+        i.setAttribute("draggable", "true");
+     }
 }
 
 function test() {
@@ -183,6 +179,12 @@ function test() {
 }
 
 // Calling functions:
+
+// Time to rip it all up
+// Instead of sending all objects together in one array, make the one array contain an array for each row, 
+// and each of the contained arrays will contain item objects
+// If a row has no items, delete it
+// Default page code will need to change, render code needs to change, reset button needs to change
 
 // Set a default menu page to revert to
 let menuObjDefaultArr = [];
@@ -202,10 +204,16 @@ localStorage.setItem("defaultJSON", JSON.stringify(menuObjDefaultArr));
 
 // Edit item quantity from original to match saved changes
 if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2 === true){
-    console.log((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4);
-    console.log(JSON.parse(localStorage.getItem("itemJSON")).length / 5);
-    for (i=0; i < ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4); i++){
-        console.log("Hi");
+    // Activates if the saved menu has more rows than the default menu
+    if ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4 > 1){
+        // Activates if the difference between the saved menu row quantity 
+        // and the default row quantity is greater than 1
+        for (i=0; i < ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 5); i++){
+            // This loop will iterate as many times as the difference between the 
+            // Saved menu row count and the default menu row count, minus one
+            let rowTemplate = document.body.getElementsByClassName("menu_row")[1].cloneNode(true);
+            menuIterative.append(rowTemplate);
+        }
     }
     while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2) {
         let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
@@ -217,7 +225,6 @@ if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.child
         // iterate through all rows added beyond default and append five children
         // Use this loop for only the last row
         // Use for loop so that you have an i value to work with - when i === value
-        // length /5 .floor +1
     }
 }
 else {
@@ -498,4 +505,57 @@ function promo_code()
         alert("That code is no longer valid");
     }
 }
+
+
+// CHECKOUT PAGE ---------------------------------------------------------------------------------------
+// function to populate receipt with cart items, and total price
+function populate_receipt()
+{
+    let elements = document.getElementsByClassName('cart_item');
+    let receipt = document.getElementById("receipt");
+    for(x = 0; x < elements.length; x++)
+    {
+        let new_item = document.createElement("tr");
+        new_item.classList.add('cart_item'); // add class name
+        // create tds
+        //name
+        let new_item_name = document.createElement("td"); 
+        new_item_name.innerHTML = elements[x].children[0].innerHTML;
+        //input
+        let new_item_quantity = document.createElement("td");
+        new_item_quantity.innerHTML = elements[x].children[1].children[0].value;
+        //Price
+        let new_item_cost = document.createElement("td");  
+        new_item_cost.innerHTML = elements[x].children[2].innerHTML;
+        //append children to new_item
+        new_item.appendChild(new_item_name);
+        new_item.appendChild(new_item_quantity);
+        new_item.appendChild(new_item_cost);
+        //append new item to html
+        receipt.append(new_item);
+    }
+    let total_price = 0;
+    for(x = 0; x < elements.length; x++)
+    {
+        total_price += Number(elements[x].children[2].innerHTML);
+    }
+    total_price = Number(total_price.toFixed(2));
+    let sales_tax_total = Number((total_price * 0.0823).toFixed(2));
+    let final_cost = Number(total_price + sales_tax_total).toFixed(2); 
+    let sub_total_cost = document.getElementById("sub_total_cost");
+    sub_total_cost.innerHTML = total_price;
+    let sales_tax = document.getElementById("sales_tax");
+    sales_tax.innerHTML = sales_tax_total;
+    let total_cost = document.getElementById("total_cost");
+    total_cost.innerHTML = final_cost;
+}
+
+//function to pull all items from cart and add them to the receipt
+// define class and constructor function (optional)
+// define empty array
+// iterate through cart items
+// create object for each item with attributes for data (price, quantity, etc)
+// Push each object to empty array
+// Stringify the array into JSON
+// Push JSON array to local storage
 
