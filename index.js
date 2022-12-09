@@ -406,6 +406,7 @@ function update_cost()
     sales_tax.innerHTML = sales_tax_total;
     let total_cost = document.getElementById("total_cost");
     total_cost.innerHTML = final_cost;
+
 }
 
 function update_quantity(a)

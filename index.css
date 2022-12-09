@@ -625,7 +625,7 @@ input[type='number']{
 }
 
 /* Receipt Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* #receipt{
+#receipt{
     box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
     padding:6mm;
     margin: 0 auto;
@@ -633,25 +633,15 @@ input[type='number']{
     background: #FFF;
 }
 
-h1{
-    font-size: 1.5em;
-    color: #222;
+#receipt h2{
+    font-size: 1em;
   }
 
-h2{
-    font-size: .9em;
-  }
-
-h3{
-    font-size: 1.2em;
-    font-weight: 300;
-    line-height: 2em;
-  }
-  
-p{
+#receipt p{
     font-size: .76em;
     color: #666;
     line-height: 1.2em;
+    display: inline-block;
   }
 
   #top, #mid, #bot{ 
@@ -671,7 +661,7 @@ p{
     min-height: 50px;
   }
 
-  table{
+table{
     width: 100%;
     border-collapse: collapse;
   }
@@ -682,8 +672,10 @@ p{
     background: #EEE;
   }
   
-.logo, img{
-      height: 120px;
-      width: 120px;
+.logo img{
+      height: 180px;
+      width: 180px;
       margin: auto;
-  } */
+      margin-left: 1.5em;
+  }
+  
