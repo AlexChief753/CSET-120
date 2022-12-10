@@ -46,7 +46,7 @@
 
         <div class="basic_info">
 
-          <div class="nameholder-info">
+          <div class="nameholder-info info_item">
             <label>Name </label>
             <input
               type="text"
@@ -54,7 +54,7 @@
               placeholder="Enter your Name"/>
           </div>
 
-          <div class="nameholder-info">
+          <div class="nameholder-info info_item">
             <label>Address </label>
             <input
               type="text"
@@ -62,7 +62,7 @@
               placeholder="Enter your Address"/>
           </div>
 
-          <div class="nameholder-info">
+          <div class="nameholder-info info_item">
             <label>Phone # </label>
             <input
               type="text"
@@ -71,7 +71,7 @@
           </div>
         
 <hr>
-        <div class="custom_info">
+        <div class="custom_info info_item">
             <label> Payment type </label>
             <input type="radio" id="card" name="time_option" value="card">
             <label for="asap">Card</label>
@@ -83,33 +83,27 @@
 
         <div class="credit_card_info">
       
-            <div class="nameholder-info">
+            <div class="nameholder-info info_item">
               <label> Card Number </label>
               <input type="text" class="credit-number-field"
                 placeholder="####-####-####"/>
             </div>
-            <div class="nameholder-info">
+            <div class="nameholder-info info_item">
               <label> Expiry Date </label>
               <input type="text" class="date-number-field" 
                      placeholder="MM-YY" />
             </div>
       
-            <div class="nameholder-info">
+            <div class="nameholder-info info_item">
               <label> CVV number </label>
               <input type="text" class="cvv-number-field" 
                      placeholder="xxx" />
             </div>
-   
-            
-            <button type="submit" onclick=""
-                    class="submit-now-btn">
-              submit
-            </button>
            
             <p>Order Type</p>
             <p>
 
-            <div class="custom_info">
+            <div class="custom_info info_item">
                 <label> Order Type </label>
                 <input type="radio" id="delivery" name="food_arrival_option" value="delivery">
                 <label for="delivery">Delivery</label>
@@ -117,19 +111,16 @@
                 <label for="pickup">Pick up</label>
             </div>
 
-            <div class="custom_info">
+            <div class="custom_info info_item">
                 <label> Timeframe </label>
                 <input type="radio" id="asap" name="time_option" value="asap">
                 <label for="asap">ASAP</label>
                 <input type="radio" id="custom" name="time_option" value="custom">
-                <label for="custom">Custom <input type="text" id="custom2" name="time_option"></label>
+                <label for="custom">Custom <input type="text" class="info_item" id="custom2" name="time_option"></label>
             </div>
    
         </div>
-        <button type="submit" class="submit-now-btn" onclick="location.href='receipt.html'">submit</button>
-        
-        <button type="submit" class="submit-now-btn"><b>Submit</b></button>
-
+        <button type="submit" class="submit-now-btn" onclick="push_to_local_storage_2();location.href='receipt.html'"><b>Submit</b></button>
         </div>
           
 
@@ -166,6 +157,8 @@
   </footer>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    
+  <script src="index.js"></script>
+<script src="index2.js"></script> 
+
 </body>
 </html>
