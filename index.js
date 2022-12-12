@@ -506,48 +506,49 @@ function promo_code()
 }
 
 
+
 // CHECKOUT PAGE ---------------------------------------------------------------------------------------
 // function to populate receipt with cart items, and total price
-function populate_receipt()
-{
-    let elements = document.getElementsByClassName('cart_item');
-    let receipt = document.getElementById("receipt");
-    for(x = 0; x < elements.length; x++)
-    {
-        let new_item = document.createElement("tr");
-        new_item.classList.add('cart_item'); // add class name
-        // create tds
-        //name
-        let new_item_name = document.createElement("td"); 
-        new_item_name.innerHTML = elements[x].children[0].innerHTML;
-        //input
-        let new_item_quantity = document.createElement("td");
-        new_item_quantity.innerHTML = elements[x].children[1].children[0].value;
-        //Price
-        let new_item_cost = document.createElement("td");  
-        new_item_cost.innerHTML = elements[x].children[2].innerHTML;
-        //append children to new_item
-        new_item.appendChild(new_item_name);
-        new_item.appendChild(new_item_quantity);
-        new_item.appendChild(new_item_cost);
-        //append new item to html
-        receipt.append(new_item);
-    }
-    let total_price = 0;
-    for(x = 0; x < elements.length; x++)
-    {
-        total_price += Number(elements[x].children[2].innerHTML);
-    }
-    total_price = Number(total_price.toFixed(2));
-    let sales_tax_total = Number((total_price * 0.0823).toFixed(2));
-    let final_cost = Number(total_price + sales_tax_total).toFixed(2); 
-    let sub_total_cost = document.getElementById("sub_total_cost");
-    sub_total_cost.innerHTML = total_price;
-    let sales_tax = document.getElementById("sales_tax");
-    sales_tax.innerHTML = sales_tax_total;
-    let total_cost = document.getElementById("total_cost");
-    total_cost.innerHTML = final_cost;
-}
+// function populate_receipt()
+// {
+//     let elements = document.getElementsByClassName('cart_item');
+//     let receipt = document.getElementById("receipt");
+//     for(x = 0; x < elements.length; x++)
+//     {
+//         let new_item = document.createElement("tr");
+//         new_item.classList.add('cart_item'); // add class name
+//         // create tds
+//         //name
+//         let new_item_name = document.createElement("td"); 
+//         new_item_name.innerHTML = elements[x].children[0].innerHTML;
+//         //input
+//         let new_item_quantity = document.createElement("td");
+//         new_item_quantity.innerHTML = elements[x].children[1].children[0].value;
+//         //Price
+//         let new_item_cost = document.createElement("td");  
+//         new_item_cost.innerHTML = elements[x].children[2].innerHTML;
+//         //append children to new_item
+//         new_item.appendChild(new_item_name);
+//         new_item.appendChild(new_item_quantity);
+//         new_item.appendChild(new_item_cost);
+//         //append new item to html
+//         receipt.append(new_item);
+//     }
+//     let total_price = 0;
+//     for(x = 0; x < elements.length; x++)
+//     {
+//         total_price += Number(elements[x].children[2].innerHTML);
+//     }
+//     total_price = Number(total_price.toFixed(2));
+//     let sales_tax_total = Number((total_price * 0.0823).toFixed(2));
+//     let final_cost = Number(total_price + sales_tax_total).toFixed(2); 
+//     let sub_total_cost = document.getElementById("sub_total_cost");
+//     sub_total_cost.innerHTML = total_price;
+//     let sales_tax = document.getElementById("sales_tax");
+//     sales_tax.innerHTML = sales_tax_total;
+//     let total_cost = document.getElementById("total_cost");
+//     total_cost.innerHTML = final_cost;
+// }
 
 //function to pull all items from cart and add them to the receipt
 // define class and constructor function (optional)

@@ -7,6 +7,8 @@ const receiptItemsContainer = document.getElementById('receiptItemsContainer');
 var customer_info = JSON.parse(localStorage.getItem("info"));
 const receiptItemsContainer_2 = document.getElementById('receiptItemsContainer_2');
 
+var total = JSON.parse(localStorage.getItem("total_price"));
+
 function push_to_local_storage()
 {
     let elements = document.getElementsByClassName('cart_item');
@@ -21,6 +23,9 @@ function push_to_local_storage()
         cart.push(item);
     }
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    let t = document.getElementById("total_cost").innerHTML;
+    localStorage.setItem("total_price",t);
 }
 
 function push_to_local_storage_2()
@@ -33,7 +38,8 @@ function push_to_local_storage_2()
             customer_info.push(item);
     }
     localStorage.setItem("info", JSON.stringify(customer_info));
-}
+
+}    
 
 
 function renderReceiptItems() 
@@ -59,15 +65,21 @@ function renderReceiptItems()
         receiptItemsContainer.innerHTML += `
             <div class="receiptItem">
                 <div class="receiptItemInfo">
-                    <p> Have a good day ${info_item}</p>
-                </div>
-               
+                    <h3> Have a good day ${info_item}</h3>
+                </div>             
             </div>
         `;
-        console.log(info_item);
     });
-};
 
+    receiptItemsContainer.innerHTML += `
+        <div class="receiptItem">
+            <div class="receiptItemInfo">
+                <h3>Your Total is: $${total}</h3>
+            </div>
+            
+        </div>
+    `;
+};
 
 
 

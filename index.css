@@ -437,6 +437,22 @@ footer{
     color: red;
 }
 
+.tip{
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 20px;
+    padding: 5px;
+}
+
+.tip input{
+    width: 40px;
+}
+
+.tip label{
+    padding-right: 5px;
+}
+
 
 /* Menu Page *---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
