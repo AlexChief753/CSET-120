@@ -333,18 +333,19 @@ const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(t
 
 function exit_mngr_mode(){
     sessionStorage.setItem("manager", false);
-    window.location.href = "index.html";
+    window.location.href = "MenuPage.html";
 }
 // CUSTOMER MENU PAGE ---------------------------------------------------------------------------------------
 
 
 function add_cart(a)
 {
+    console.log(a.parentElement)
     let c = true;
     let elements = document.getElementsByClassName('cart_item');
     for(x = 0; x < elements.length; x++)
     {
-        if(a.name == elements[x].children[0].innerHTML)
+        if(a.parentElement.children[1].firstElementChild.innerHTML == elements[x].children[0].innerHTML)
         {
             alert("already in cart");
             c = false;
@@ -421,7 +422,7 @@ function update_quantity(a)
     else
     {
         let item_cost2 = a.parentNode.parentNode.children[2];
-        console.log(item_cost2);
+        // console.log(item_cost2);
         item_cost2.innerHTML = (a.value * a.price).toFixed(2);
         update_cost();
     }
@@ -548,15 +549,6 @@ function populate_receipt()
     let total_cost = document.getElementById("total_cost");
     total_cost.innerHTML = final_cost;
 }
-
-//function to pull all items from cart and add them to the receipt
-// define class and constructor function (optional)
-// define empty array
-// iterate through cart items
-// create object for each item with attributes for data (price, quantity, etc)
-// Push each object to empty array
-// Stringify the array into JSON
-// Push JSON array to local storage
 
 // Order now button - disable manager edit mode -------------
 function order_now_nav_button() {
