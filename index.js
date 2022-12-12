@@ -75,7 +75,6 @@ function addItem(){
         itemTemplateCopy.children[5].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
     }
     if (document.getElementById("mngrURL").value.trim() !== ""){
-        console.log(itemTemplateCopy.children[2]);
         itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
     }
     if (document.getElementById("menu").lastElementChild.childElementCount >= 5) {
@@ -180,16 +179,6 @@ function reset() {
     }
 }
 
-function draggableItems(){
-    for (i of document.getElementsByClassName("menu_item")){
-        i.setAttribute("draggable", "true");
-     }
-}
-
-function test() {
-    console.log("test button clicked");
-}
-
 // Calling functions:
 
 // Set default menu page to revert to before anything else runs
@@ -244,7 +233,7 @@ else { // If saved menu item count is less than default item count
 // Redefines item properties
 let q = 0;
 for (i=2; i<menuIterative.childElementCount; i++){
-let menuRow = menuIterative.children[i];
+    let menuRow = menuIterative.children[i];
     for(n=0; n<menuRow.childElementCount; n++){
         let menuItem = menuRow.children[n];
         menuItem.children[0].src = JSON.parse(localStorage.getItem("itemJSON"))[q].link;
@@ -317,10 +306,10 @@ else{
             }
         }
     }
-    draggableItems();
 }
 
 const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(true);
+// Sus
 
 
 // Give warning about unsaved changes if user attempts to leave the page
@@ -367,16 +356,16 @@ function add_cart(a)
         // create tds
         //name
         let new_item_name = document.createElement("td"); 
-        new_item_name.innerHTML = a.name;
+        new_item_name.innerHTML = a.parentElement.children[1].firstElementChild.innerHTML;
         //input
         let new_item_quantity = document.createElement("td");
         new_item_quantity.classList.add('input_box'); // add class name
         let selector = document.createElement("input");
-        selector.type = "number"; selector.value = 1; selector.price = a.value; // setting attribute values
+        selector.type = "number"; selector.value = 1; selector.price = Number((a.parentElement.children[1].lastElementChild.innerHTML).slice(1)); // setting attribute values
         selector.onchange = function() {update_quantity(this)};
         new_item_quantity.appendChild(selector,0);
         //Price
-        let new_item_cost = document.createElement("td");  new_item_cost.innerHTML = a.value;
+        let new_item_cost = document.createElement("td");  new_item_cost.innerHTML = Number((a.parentElement.children[1].lastElementChild.innerHTML).slice(1));
         //Remove item button
         let trash = document.createElement("td");
         let trash_button = document.createElement("button");
