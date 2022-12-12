@@ -27,7 +27,7 @@
                     <button onclick="location.href='login.html'"><b>Sign In</b></button>
                 </li>
                 <li>
-                    <button onclick="location.href='MenuPage.html'"><b>Menu / Order Now</b></button>
+                    <button onclick="order_now_nav_button()"><b>Menu / Order Now</b></button>
                 </li>             
             </ul>
         </div>
@@ -35,7 +35,7 @@
 
 <!-- Management Div: to be deleted by javascript upon customer login -->
     <manager id="managerDiv">
-        <button onclick="exit_mngr_mode();">Return to Login Page</button>
+        <button onclick="exit_mngr_mode();" id="manager_exit_button">Exit Manager Mode</button>
         <h2>Admin Item Manager --- READ ME</h2>
         <p>Reload the page to discard any unsaved changes. Please save often.</p>
         <p id="add_new_item">Add New Item: (Begin all prices with "$")</p>

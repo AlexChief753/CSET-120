@@ -456,6 +456,12 @@ manager p {
     text-align: left;
 }
 
+#manager_exit_button{
+    font-size: large;
+    color: red;
+    font-weight: 600;
+}
+
 
 #menu_cart
 {
