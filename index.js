@@ -75,7 +75,6 @@ function addItem(){
         itemTemplateCopy.children[5].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
     }
     if (document.getElementById("mngrURL").value.trim() !== ""){
-        console.log(itemTemplateCopy.children[2]);
         itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
     }
     if (document.getElementById("menu").lastElementChild.childElementCount >= 5) {
@@ -88,6 +87,17 @@ function addItem(){
 
 function removeItem(source){
     source.parentElement.remove();
+
+    // Deleting item from html is fine
+    // Have the save and render functions do it all 
+    // Iterate through all items, indiscriminate of row
+    // Create objects from the item values
+
+    // Purpose of this addition is to assign an index number to each menu item so the corresponding json item can be filtered
+    // need way to match up position of element with corresponding index in saved menu items array
+    // Iterate through all rows and row items, keep count (q) that increases until item contains (source)?
+    // Access parent element, .contains()/.includes() ?
+    // One "master" array? Rendering?
 }
 
 // This function toggles display of image link input
@@ -159,6 +169,7 @@ function saveButton(){
         }
     }
     localStorage.setItem("itemJSON", JSON.stringify(menuObjArr));
+    alert("Changes saved.");
 }
  
 function reset() {
@@ -168,25 +179,9 @@ function reset() {
     }
 }
 
-function draggableItems(){
-    for (i of document.getElementsByClassName("menu_item")){
-        i.setAttribute("draggable", "true");
-     }
-}
-
-function test() {
-    console.log("test button clicked");
-}
-
 // Calling functions:
 
-// Time to rip it all up
-// Instead of sending all objects together in one array, make the one array contain an array for each row, 
-// and each of the contained arrays will contain item objects
-// If a row has no items, delete it
-// Default page code will need to change, render code needs to change, reset button needs to change
-
-// Set a default menu page to revert to
+// Set default menu page to revert to before anything else runs
 let menuObjDefaultArr = [];
 let menuIterative = document.getElementById("menu");
 for (i=2; i<menuIterative.childElementCount; i++){
@@ -203,41 +198,42 @@ for (i=2; i<menuIterative.childElementCount; i++){
 localStorage.setItem("defaultJSON", JSON.stringify(menuObjDefaultArr));
 
 // Edit item quantity from original to match saved changes
-if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2 === true){
-    // Activates if the saved menu has more rows than the default menu
+if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2){
+    // if row count difference is greater than one, add appropriate amount of full rows
     if ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 4 > 1){
-        // Activates if the difference between the saved menu row quantity 
-        // and the default row quantity is greater than 1
         for (i=0; i < ((Math.floor(JSON.parse(localStorage.getItem("itemJSON")).length / 5) + 1) - 5); i++){
-            // This loop will iterate as many times as the difference between the 
-            // Saved menu row count and the default menu row count, minus one
             let rowTemplate = document.body.getElementsByClassName("menu_row")[1].cloneNode(true);
             menuIterative.append(rowTemplate);
         }
     }
-    while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.childElementCount - 2) {
-        let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
-        menuIterative.append(rowTemplate);
-        let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
-        for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
-            rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
-        }
-        // iterate through all rows added beyond default and append five children
-        // Use this loop for only the last row
-        // Use for loop so that you have an i value to work with - when i === value
+    // Add last row, which may or may not be full
+    let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode()
+    let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+    for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
+        rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
     }
+    menuIterative.append(rowTemplate);
 }
-else {
+else { // If saved menu item count is less than default item count
     while(JSON.parse(localStorage.getItem("itemJSON")).length / 5 < menuIterative.childElementCount - 2) {
         let menuIterative = document.getElementById("menu");
         menuIterative.lastElementChild.remove();
     }
+    let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode()
+    let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+    for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
+        rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
+    }
+    menuIterative.append(rowTemplate);
+        // delete then add empty row, use loop from above to add correct # of items
+        // While save row count is less than default row count, delete rows until saved is equal or greater
+        // Then delete one row and populate with appropriate amount of items
 }
 
 // Redefines item properties
 let q = 0;
 for (i=2; i<menuIterative.childElementCount; i++){
-let menuRow = menuIterative.children[i];
+    let menuRow = menuIterative.children[i];
     for(n=0; n<menuRow.childElementCount; n++){
         let menuItem = menuRow.children[n];
         menuItem.children[0].src = JSON.parse(localStorage.getItem("itemJSON"))[q].link;
@@ -264,18 +260,18 @@ else{
         for(n=0; n<menuRow.childElementCount; n++){
             if(i===1){
                 let menuItem = menuRow.children[n];
-                menuItem.firstElementChild.setAttribute("contenteditable", true);
-                menuItem.lastElementChild.setAttribute("contenteditable", true);
+                // menuItem.firstElementChild.setAttribute("contenteditable", true);
+                // menuItem.lastElementChild.setAttribute("contenteditable", true);
 
-                let textBox = document.createElement('strong');
-                textBox.innerHTML = "Click name or price to edit";
-                textBox.style.display = "inline";
-                menuItem.insertBefore(textBox, menuItem.children[0]);
+                // let textBox = document.createElement('strong');
+                // textBox.innerHTML = "Click name or price to edit";
+                // textBox.style.display = "inline";
+                // menuItem.insertBefore(textBox, menuItem.children[0]);
 
-                let removeButton = document.createElement("button");
-                removeButton.innerHTML = "Delete Item"
-                removeButton.setAttribute("onclick", "removeItem(this);") 
-                menuItem.insertBefore(removeButton, menuItem.children[0]);
+                // let removeButton = document.createElement("button");
+                // removeButton.innerHTML = "Delete Item"
+                // removeButton.setAttribute("onclick", "removeItem(this);") 
+                // menuItem.insertBefore(removeButton, menuItem.children[0]);
                 menuItem.lastElementChild.remove();
             }
 
@@ -310,10 +306,10 @@ else{
             }
         }
     }
-    draggableItems();
 }
 
 const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(true);
+// Sus
 
 
 // Give warning about unsaved changes if user attempts to leave the page
@@ -360,16 +356,16 @@ function add_cart(a)
         // create tds
         //name
         let new_item_name = document.createElement("td"); 
-        new_item_name.innerHTML = a.name;
+        new_item_name.innerHTML = a.parentElement.children[1].firstElementChild.innerHTML;
         //input
         let new_item_quantity = document.createElement("td");
         new_item_quantity.classList.add('input_box'); // add class name
         let selector = document.createElement("input");
-        selector.type = "number"; selector.value = 1; selector.price = a.value; // setting attribute values
+        selector.type = "number"; selector.value = 1; selector.price = Number((a.parentElement.children[1].lastElementChild.innerHTML).slice(1)); // setting attribute values
         selector.onchange = function() {update_quantity(this)};
         new_item_quantity.appendChild(selector,0);
         //Price
-        let new_item_cost = document.createElement("td");  new_item_cost.innerHTML = a.value;
+        let new_item_cost = document.createElement("td");  new_item_cost.innerHTML = Number((a.parentElement.children[1].lastElementChild.innerHTML).slice(1));
         //Remove item button
         let trash = document.createElement("td");
         let trash_button = document.createElement("button");

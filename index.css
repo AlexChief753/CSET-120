@@ -54,6 +54,7 @@ header, ul{
     transform: skewX(-30deg);
     box-shadow: 2px 2px 2px yellow;
     font-weight: bolder;
+    transition: 1s
 }
 
 .menu_buttons li:hover{
@@ -450,7 +451,10 @@ manager {
 
 manager h2{}
 
-manager p {}
+manager p {
+    font-weight: 600;
+    text-align: left;
+}
 
 
 #menu_cart

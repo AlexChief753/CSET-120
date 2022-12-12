@@ -38,14 +38,14 @@
 
 <!-- Management Div: to be deleted by javascript upon customer login -->
     <manager id="managerDiv">
+        <button onclick="location.href='login.html'">Return to Login Page</button>
         <h2>Admin Item Manager --- READ ME</h2>
         <p>Reload the page to discard any unsaved changes. Please save often.</p>
-        <p>Add New Item:</p>
+        <p id="add_new_item">Add New Item: (Begin all prices with "$")</p>
         <input placeholder="Burger" type="text" name="" id="mngrName">
         <input placeholder="$5.99" type="text" name="" id="mngrPrice">
         <input placeholder="Image URL" type="text" name="" id="mngrURL">
         <button onclick="addItem();">Add Item</button>
-        <button onclick="test();">Test Button</button>
         <br>
         <br>
         <button onclick="saveButton();">Save Changes</button>
