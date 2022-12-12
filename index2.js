@@ -29,16 +29,8 @@ function push_to_local_storage_2()
     let customer_info = [];
     for(x = 0; x < elements.length; x++)
     {
-        if(elements[x].innerHTML == null)
-        {
             let item = elements[x].value;
             customer_info.push(item);
-        }
-        else
-        {
-            let item = elements[x].innerHTML;
-            customer_info.push(item);
-        }
     }
     localStorage.setItem("info", JSON.stringify(customer_info));
 }
@@ -67,14 +59,12 @@ function renderReceiptItems()
         receiptItemsContainer.innerHTML += `
             <div class="receiptItem">
                 <div class="receiptItemInfo">
-                    <h3> wow </h3>
-                    <p ${info_item}</p>
+                    <p> Have a good day ${info_item}</p>
                 </div>
                
             </div>
         `;
-        // receiptItemstotal += receiptItemSubTotal;
-        console.log(customer_info);
+        console.log(info_item);
     });
 };
 
