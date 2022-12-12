@@ -331,7 +331,10 @@ const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(t
 // Drag and drop item reorganization
 
 
-
+function exit_mngr_mode(){
+    sessionStorage.setItem("manager", false);
+    window.location.href = "index.html";
+}
 // CUSTOMER MENU PAGE ---------------------------------------------------------------------------------------
 
 
@@ -555,3 +558,8 @@ function populate_receipt()
 // Stringify the array into JSON
 // Push JSON array to local storage
 
+// Order now button - disable manager edit mode -------------
+function order_now_nav_button() {
+    sessionStorage.setItem("manager", false);
+    window.location.href = "MenuPage.html";
+}
