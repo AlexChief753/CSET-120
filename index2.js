@@ -1,7 +1,11 @@
 // CHECKOUT PAGE ---------------------------------------------------------------------------------------
 // function to push cart items to array and send to local storage
+
 var cart = JSON.parse(localStorage.getItem("cart"));
 const receiptItemsContainer = document.getElementById('receiptItemsContainer');
+
+var customer_info = JSON.parse(localStorage.getItem("info"));
+const receiptItemsContainer_2 = document.getElementById('receiptItemsContainer_2');
 
 function push_to_local_storage()
 {
@@ -19,7 +23,21 @@ function push_to_local_storage()
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-function renderReceiptItems() {
+function push_to_local_storage_2()
+{
+    let elements = document.getElementsByClassName('info_item');
+    let customer_info = [];
+    for(x = 0; x < elements.length; x++)
+    {
+            let item = elements[x].value;
+            customer_info.push(item);
+    }
+    localStorage.setItem("info", JSON.stringify(customer_info));
+}
+
+
+function renderReceiptItems() 
+{
     receiptItemsContainer.innerHTML = "";
     cart.forEach((receiptItem) => {
         let receiptItemSubTotal = receiptItem.price * receiptItem.quantity;
@@ -35,6 +53,23 @@ function renderReceiptItems() {
         `;
         // receiptItemstotal += receiptItemSubTotal;
     });
+
+    receiptItemsContainer_2.innerHTML = "";
+    customer_info.forEach((info_item) => {
+        receiptItemsContainer.innerHTML += `
+            <div class="receiptItem">
+                <div class="receiptItemInfo">
+                    <p> Have a good day ${info_item}</p>
+                </div>
+               
+            </div>
+        `;
+        console.log(info_item);
+    });
 };
+
+
+
+
+
 renderReceiptItems();
- 

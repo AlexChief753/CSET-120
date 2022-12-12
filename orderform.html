@@ -18,27 +18,10 @@
     <div id="logo_header">
         <img class="logo" src="https://trello.com/1/cards/6376322a169f7a0aa500a99d/attachments/6376324593878d0164d9da2e/download/Los_Pollos_Hermanos_logo.png" alt="">
     </div>
-
-    <div class="menu_buttons">
-        <ul>
-            <li>
-                <button onclick="location.href='index.html'"><b>Home</b></button>
-            </li>
-            <li>
-                <button onclick="location.href='MenuPage.html'"><b>Menu</b></button>
-            </li>
-            <li>
-                <button onclick="location.href='aboutus.html'"><b>About Us</b></button>
-            </li>
-            <li>
-                <button onclick="location.href='login.html'"><b>Sign In</b></button>
-            </li>
-            <li>
-                <button onclick="location.href='MenuPage.html'"><b>Order Now</b></button>
-            </li>             
-        </ul>
-    </div>
+    <br>
     </header>
+
+    <br><br><br><br><br>
 <div class="outer_payment">
     
     <div class="paymenttt">
@@ -50,7 +33,7 @@
             <label>Name </label>
             <input
               type="text"
-              class="card-name-field"
+              class="card-name-field info_item"
               placeholder="Enter your Name"/>
           </div>
 
@@ -99,12 +82,6 @@
               <input type="text" class="cvv-number-field" 
                      placeholder="xxx" />
             </div>
-   
-            
-            <button type="submit" onclick=""
-                    class="submit-now-btn">
-              submit
-            </button>
            
             <p>Order Type</p>
             <p>
@@ -126,10 +103,7 @@
             </div>
    
         </div>
-        <button type="submit" class="submit-now-btn" onclick="location.href='receipt.html'">submit</button>
-        
-        <button type="submit" class="submit-now-btn"><b>Submit</b></button>
-
+        <button type="submit" class="submit-now-btn" onclick="push_to_local_storage_2();location.href='receipt.html'"><b>Submit</b></button>
         </div>
           
 
@@ -166,6 +140,8 @@
   </footer>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    
+  <script src="index.js"></script>
+<script src="index2.js"></script> 
+
 </body>
 </html>
