@@ -44,7 +44,7 @@
             <label>Name </label>
             <input
               type="text"
-              class="card-name-field info_item"
+              class="card-name-field info_item check_empty"
               placeholder="Enter your Name"/>
           </div>
 
@@ -52,7 +52,7 @@
             <label>Address </label>
             <input
               type="text"
-              class="card-name-field"
+              class="card-name-field check_empty"
               placeholder="Enter your Address"/>
           </div>
 
@@ -60,16 +60,16 @@
             <label>Phone # </label>
             <input
               type="text"
-              class="card-name-field"
+              class="card-name-field check_empty"
               placeholder="Enter your phone number"/>
           </div>
         
 <hr>
         <div class="custom_info">
             <label> Payment type </label>
-            <input type="radio" id="card" name="time_option" value="card">
+            <input type="radio" id="card" name="pay_option" value="card" checked = "checked">
             <label for="asap">Card</label>
-            <input type="radio" id="cash" name="time_option" value="cash">
+            <input type="radio" id="cash" name="pay_option" value="cash">
             <label for="custom">Cash</label>
         </div>
 <hr>
@@ -79,18 +79,18 @@
       
             <div class="nameholder-info">
               <label> Card Number </label>
-              <input type="text" class="credit-number-field"
+              <input type="text" class="credit-number-field check_empty"
                 placeholder="####-####-####"/>
             </div>
             <div class="nameholder-info">
               <label> Expiry Date </label>
-              <input type="text" class="date-number-field" 
+              <input type="text" class="date-number-field check_empty" 
                      placeholder="MM-YY" />
             </div>
       
             <div class="nameholder-info">
               <label> CVV number </label>
-              <input type="text" class="cvv-number-field" 
+              <input type="text" class="cvv-number-field check_empty" 
                      placeholder="xxx" />
             </div>
            
@@ -99,15 +99,15 @@
 
             <div class="custom_info">
                 <label> Order Type </label>
-                <input type="radio" id="delivery" name="food_arrival_option" value="delivery">
-                <label for="delivery">Delivery</label>
+                <input type="radio" id="delivery" name="food_arrival_option" value="delivery" checked = "checked">
+                    <label for="delivery">Delivery</label>
                 <input type="radio" id="pickup" name="food_arrival_option" value="pickup">
-                <label for="pickup">Pick up</label>
+                    <label for="pickup">Pick up</label>
             </div>
 
             <div class="custom_info">
                 <label> Timeframe </label>
-                <input type="radio" id="asap" name="time_option" value="asap">
+                <input type="radio" id="asap" name="time_option" value="asap" checked = "checked">
                 <label for="asap">ASAP</label>
                 <input type="radio" id="custom" name="time_option" value="custom">
                 <label for="custom">Custom <input type="text" id="custom2" name="time_option"></label>
@@ -120,7 +120,7 @@
               </div>
    
         </div>
-        <button type="submit" class="submit-now-btn" onclick="push_to_local_storage_2();location.href='receipt.html'"><b>Submit</b></button>
+        <button type="submit" class="submit-now-btn" onclick="push_to_local_storage_2()"><b>Submit</b></button>
         </div>
           
 

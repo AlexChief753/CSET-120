@@ -30,15 +30,33 @@ function push_to_local_storage()
 
 function push_to_local_storage_2()
 {
-    let elements = document.getElementsByClassName('info_item');
-    let customer_info = [];
-    for(x = 0; x < elements.length; x++)
-    {
-            let item = elements[x].value;
-            customer_info.push(item);
-    }
-    localStorage.setItem("info", JSON.stringify(customer_info));
+    let empty = document.getElementsByClassName("check_empty");
+    let cont = true;
 
+    for(x = 0; x< empty.length ;x++)
+    {
+        if(empty[x].value == "")
+        {
+            cont = false;
+            break;
+        }
+    }
+
+    if(cont === true)
+    {
+        let elements = document.getElementsByClassName('info_item');
+        let customer_info = [];
+        for(x = 0; x < elements.length; x++)
+        {
+                let item = elements[x].value;
+                customer_info.push(item);
+        }
+        localStorage.setItem("info", JSON.stringify(customer_info));
+        location.href='receipt.html';
+    }
+    else{
+        alert("Please fill out the data")
+    }
 }    
 
 
