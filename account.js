@@ -29,6 +29,7 @@ function signUp() {
     }
     if(status === true) {
         localStorage.setItem(userEmail, JSON.stringify(infoArray));
+        sessionStorage.setItem("manager", "false");
         window.location.href = "MenuPage.html";
     }
 }
