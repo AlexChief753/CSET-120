@@ -21,7 +21,18 @@
     <br>
     </header>
 
-    <br><br><br><br><br>
+    <br><br>
+
+
+    <div class="login_buttons">
+      <br>
+      <button type="button" class="btn" onclick="location.href='MenuPage.html'">Cancel</button>
+  
+      <br>
+  <br>
+  </div>
+
+  <br><br>
 <div class="outer_payment">
     
     <div class="paymenttt">
@@ -101,6 +112,12 @@
                 <input type="radio" id="custom" name="time_option" value="custom">
                 <label for="custom">Custom <input type="text" id="custom2" name="time_option"></label>
             </div>
+
+            <div class="tip">
+                <label> Tip </label>
+                <input type="text" class="credit-number-field" id="tip" onchange="tip(this)"
+                  placeholder="$"/>
+              </div>
    
         </div>
         <button type="submit" class="submit-now-btn" onclick="push_to_local_storage_2();location.href='receipt.html'"><b>Submit</b></button>
