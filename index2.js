@@ -22,10 +22,15 @@ function push_to_local_storage()
         }
         cart.push(item);
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    let t = document.getElementById("total_cost").innerHTML;
-    localStorage.setItem("total_price",t);
+    if(cart == ""){
+        alert("Please add something to the cart before checking out")
+    }
+    else{
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.href='orderform.html'
+        let t = document.getElementById("total_cost").innerHTML;
+        localStorage.setItem("total_price",t);
+    }
 }
 
 function push_to_local_storage_2()
