@@ -20,7 +20,13 @@ function push_to_local_storage()
         }
         cart.push(item);
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if(cart == ""){
+        alert("Please add something to the cart before checking out")
+    }
+    else{
+        localStorage.setItem("cart", JSON.stringify(cart));
+        location.href='orderform.html'
+    }
 }
 
 function push_to_local_storage_2()
