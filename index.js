@@ -1,61 +1,7 @@
-let form = document.getElementById("form");
-let logInDiv = document.getElementById("logInDiv");
-
-function signUp() {
-    let length = form.childElementCount;
-    let userEmail = "";
-    let infoArray =[];
-    let status = true;
-    for(let i=0; i<length; i++){
-        if(i%2===1){
-            if (i<10 && form.children[i].value.length <= 3){
-                alert(`${form.children[i-1].innerHTML.replace(":", "")} is too short. Please use a minimum of 4 characters.`);
-                status = false;
-            }
-            if (i===1){
-                if (localStorage.getItem(form.children[i].value) !== null){
-                    alert("This email is associated existing account. Please use a different email or try logging in.");
-                    status = false;
-                }
-                else{
-                    userEmail = form.children[i].value;
-                }
-            }
-            if (i!==1){
-                infoArray.push(form.children[i].value);
-            }
-        }
-    }
-    if(status === true) {
-        localStorage.setItem(userEmail, infoArray);
-        window.location.href = "MenuPage.html";
-    }
-}
-
-function logIn(){
-    if(logInDiv.children[1].value === "gustavo" && logInDiv.children[3].value === "fring"){
-        sessionStorage.setItem("manager", "true");
-        alert("Manager login successful. Entering menu edit mode.");
-        window.location.href ="MenuPage.html";
-    }
-    else if (localStorage.getItem(logInDiv.children[1].value) !==null && localStorage.getItem(logInDiv.children[1].value) !== logInDiv.children[3].value){
-        alert("Incorrect Password.");
-    }
-    else if (localStorage.getItem(logInDiv.children[1].value) === logInDiv.children[3].value){
-        sessionStorage.setItem("manager", "false");
-        window.location.href = "MenuPage.html";
-    }
-    else if (localStorage.getItem(logInDiv.children[1].value) === null){
-        alert("Account does not exist.");
-    }
-}
-
-
-
-
 // Menu Page ------------------------------------------------------------------------------
 
 // Shallow copy of an customer view menu item and menu row
+let mngrItemTemplate = "";
 const itemTemplate = document.body.getElementsByClassName("menu_item")[0].cloneNode(true);
 const rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
 class MenuItem {
@@ -67,15 +13,21 @@ class MenuItem {
 }
 
 function addItem(){
-    let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
+    // let itemTemplateCopy = mngrItemTemplate.cloneNode(true);
+
+    let itemTemplateCopy = document.createElement("div");
+        itemTemplateCopy.innerHTML = JSON.parse(localStorage.getItem("mngrItemTemplate"));
+        itemTemplateCopy.classList.add("menu_item");
+        itemTemplateCopy.firstElementChild.classList.add("menu_item_fp");
+
     if (document.getElementById("mngrName").value.trim() !== ""){
-        itemTemplateCopy.children[5].firstElementChild.innerHTML = document.getElementById("mngrName").value;
+        itemTemplateCopy.children[1].firstElementChild.innerHTML = document.getElementById("mngrName").value;
     }
     if (document.getElementById("mngrPrice").value.trim() !== ""){
-        itemTemplateCopy.children[5].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
+        itemTemplateCopy.children[1].lastElementChild.innerHTML = document.getElementById("mngrPrice").value
     }
     if (document.getElementById("mngrURL").value.trim() !== ""){
-        itemTemplateCopy.children[2].src = document.getElementById("mngrURL").value;
+        itemTemplateCopy.children[0].src = document.getElementById("mngrURL").value;
     }
     if (document.getElementById("menu").lastElementChild.childElementCount >= 5) {
         let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
@@ -176,12 +128,17 @@ function reset() {
     if (confirm("Are you sure? All changes will be lost!") === true){
         localStorage.setItem("itemJSON", localStorage.getItem("defaultJSON"));
         location.reload();
+        mngrItemTemplate = document.getElementById("legendaryChicken").innerHTML;
+        localStorage.setItem("mngrItemTemplate", JSON.stringify(mngrItemTemplate));
     }
 }
 
 // Calling functions:
 
+
+
 // Set default menu page to revert to before anything else runs
+
 let menuObjDefaultArr = [];
 let menuIterative = document.getElementById("menu");
 for (i=2; i<menuIterative.childElementCount; i++){
@@ -207,7 +164,7 @@ if(JSON.parse(localStorage.getItem("itemJSON")).length / 5 > menuIterative.child
         }
     }
     // Add last row, which may or may not be full
-    let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode()
+    let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode();
     let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
     for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
         rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
@@ -220,8 +177,15 @@ else { // If saved menu item count is less than default item count
         menuIterative.lastElementChild.remove();
     }
     let rowTemplate = document.body.getElementsByClassName("menu_row")[0].cloneNode()
-    let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+    // let itemTemplateCopy = document.getElementById("legendaryChicken").cloneNode(true);
+    let itemTemplateCopy = JSON.parse(localStorage.getItem("mngrItemTemplate"));
     for(i=0; i < JSON.parse(localStorage.getItem("itemJSON")).length % 5; i++){
+        let itemTemplateCopy = document.createElement("div");
+        itemTemplateCopy.innerHTML = JSON.parse(localStorage.getItem("mngrItemTemplate"));
+        itemTemplateCopy.classList.add("menu_item");
+        itemTemplateCopy.firstElementChild.classList.add("menu_item_fp");
+        console.log(itemTemplateCopy.innerHTML)
+        // itemTemplateCopy.cl
         rowTemplate.appendChild(itemTemplateCopy.cloneNode(true));
     }
     menuIterative.append(rowTemplate);
@@ -308,32 +272,21 @@ else{
     }
 }
 
-const mngrItemTemplate = document.getElementById("legendaryChicken").cloneNode(true);
-// Sus
 
 
-// Give warning about unsaved changes if user attempts to leave the page
-// Preview image button is replaced by undo button on click, vice versa
-// Save Button
-// focusout event?
+if (localStorage.getItem("mngrItemTemplate") == null){
+    mngrItemTemplate = document.getElementById("legendaryChicken").innerHTML;
+    localStorage.setItem("mngrItemTemplate", JSON.stringify(mngrItemTemplate));
+}
+// console.log((localStorage.getItem("mngrItemTemplate")));
+// console.log(JSON.stringify(mngrItemTemplate))
 
-// Local/Session storage key and array to remember changes from base file 
-// Function that runs on menu load to reflect manager changes.
-// Key for images, for names, and for prices
-// Reassign local storage keys on button press (call a function)
-// Only reassign image if input box has text in it
-// Use local storage to remember item changes
-// Button that saves changes by iterating through, reading values, and updating 
-// innerhtml attribute(s)
-
-
-// Option to add item to end or to beginning (the end is way easier) + add row to beginning
-// Drag and drop item reorganization
 
 
 function exit_mngr_mode(){
     sessionStorage.setItem("manager", false);
     window.location.href = "MenuPage.html";
+    window.reload;
 }
 // CUSTOMER MENU PAGE ---------------------------------------------------------------------------------------
 
@@ -347,7 +300,7 @@ function add_cart(a)
     {
         if(a.parentElement.children[1].firstElementChild.innerHTML == elements[x].children[0].innerHTML)
         {
-            alert("already in cart");
+            alert("This item is already in your cart.");
             c = false;
             break
         }
@@ -550,7 +503,7 @@ function populate_receipt()
     total_cost.innerHTML = final_cost;
 }
 
-// Order now button - disable manager edit mode -------------
+// Order now button - disable manager edit mode -------------------------------
 function order_now_nav_button() {
     sessionStorage.setItem("manager", false);
     window.location.href = "MenuPage.html";
